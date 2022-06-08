@@ -6,6 +6,8 @@ authors = ["Anatoly Raev <cralixraev@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+requests = "^2.27.1"
+requests-ratelimiter = "^0.3.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
