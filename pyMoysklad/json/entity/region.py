@@ -21,4 +21,4 @@ class RegionMixin(abc.ObjectMixin):
         return self._get_collection("entity/region", Region, **kwargs)
 
     def get_region(self, uuid: UUID) -> Region:
-        pass
+        return self._get_entity("entity/region", Region, uuid)

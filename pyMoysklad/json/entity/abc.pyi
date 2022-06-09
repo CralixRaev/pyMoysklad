@@ -4,4 +4,5 @@ from pyMoysklad.json.client import JSONApi
 
 
 class Object(DataClassJSONMixin): ...
-class ObjectMixin(JSONApi): ...
+class ObjectMixin(JSONApi):
+    self: JSONApi

@@ -8,12 +8,9 @@ from pyrate_limiter import Limiter, RequestRate, Duration
 from requests.auth import HTTPBasicAuth
 from requests_ratelimiter import LimiterSession
 
-from pyMoysklad.json.exceptions import AuthError, ApiError
+from pyMoysklad.json.exceptions import AuthError, ApiError, ERRORS
 
 ENDPOINT = "https://online.moysklad.ru/api/remap/1.2/"
-ERRORS = {
-    1056: AuthError
-}
 
 
 class TokenAuth(requests.auth.AuthBase):
@@ -36,9 +33,10 @@ class Requester:
                 if error['code'] in ERRORS:
                     raise ERRORS[error['code']](error['error'])
                 else:
-                    exception = ApiError(error['error'])
+                    exception = ApiError(error['error'], code=error['code'])
                     raise exception
             return answer
+
         return wrap
 
     @_check_for_errors
@@ -49,7 +47,11 @@ class Requester:
     @_check_for_errors
     def post(self, url: str, data: dict):
         self.session.auth = self._auth
-        return self.session.post(urljoin(ENDPOINT, url), data=json.dumps(data)).json()
+        return self.session.post(urljoin(ENDPOINT, url),
+                                 data=json.dumps(data),
+                                 headers={
+                                     'content-type': 'application/json'
+                                 }).json()
 
     @_check_for_errors
     def put(self, url: str, data: dict):

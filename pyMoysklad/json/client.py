@@ -1,3 +1,7 @@
+from typing import Type
+from urllib.parse import urljoin
+from uuid import UUID
+
 from pyMoysklad.json.entity import abc
 from pyMoysklad.json.entity.country import Country, CountryMixin
 from pyMoysklad.json.entity.region import RegionMixin
@@ -27,7 +31,7 @@ class JSONApi(CountryMixin,
     def _create_filter(self, filters: tuple[str] = None) -> str | None:
         return ";".join(filters) if filters else None
 
-    def _get_collection(self, url: str, entity: abc.Object,
+    def _get_collection(self, url: str, entity: Type[abc.Object],
                         order: list[tuple[str] | str] = None,
                         filter: tuple[str] = None,
                         search: str = None) -> CollectionAnswer:
@@ -41,3 +45,9 @@ class JSONApi(CountryMixin,
         answer = CollectionAnswer(answer_raw['context'], MetaArray.from_dict(answer_raw['meta']),
                                   [entity.from_dict(row) for row in answer_raw['rows']])
         return answer
+
+    def _get_entity(self, url: str, entity: Type[abc.Object], uuid: UUID) -> abc.Object:
+        return entity.from_dict(self.requester.get(f'{url}/{str(uuid)}'))
+
+    def _create_entity(self, url, entity: abc.Object) -> abc.Object:
+        return entity.__class__.from_dict(self.requester.post(url, entity.to_dict(omit_none=True)))
