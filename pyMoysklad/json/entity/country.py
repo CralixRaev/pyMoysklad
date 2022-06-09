@@ -38,3 +38,9 @@ class CountryMixin(abc.ObjectMixin):
 
     def delete_country(self, uuid: UUID):
         return self._delete_entity(NAME, uuid)
+
+    def edit_country(self, uuid, country: Country) -> Country:
+        return self._edit_entity(NAME, country, uuid)
+
+    def mass_delete_country(self, metas: list[Meta]):
+        return self._mass_delete_entity(NAME, metas)

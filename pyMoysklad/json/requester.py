@@ -62,7 +62,11 @@ class Requester:
     @_check_for_errors
     def put(self, url: str, data: dict):
         self.session.auth = self._auth
-        return self.session.put(urljoin(ENDPOINT, url), data=json.dumps(data)).json()
+        return self.session.put(urljoin(ENDPOINT, url),
+                                data=json.dumps(data),
+                                headers={
+                                    "content-type": "application/json"
+                                }).json()
 
     @_check_for_errors
     def delete(self, url: str):

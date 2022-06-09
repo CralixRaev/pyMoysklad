@@ -6,7 +6,7 @@ from pyMoysklad.json.entity import abc
 from pyMoysklad.json.entity.country import Country, CountryMixin
 from pyMoysklad.json.entity.region import RegionMixin
 from pyMoysklad.json.entity.subscription import SubscriptionMixin
-from pyMoysklad.json.meta import MetaArray
+from pyMoysklad.json.meta import MetaArray, Meta
 from pyMoysklad.json.requester import Requester
 from pyMoysklad.json.utils.types import CollectionAnswer
 
@@ -52,11 +52,19 @@ class JSONApi(CountryMixin,
     def _delete_entity(self, name: str, uuid: UUID) -> None:
         self.requester.delete(f'entity/{name}/{str(uuid)}')
 
-    def _create_entity(self, name, entity: abc.Object) -> abc.Object:
+    def _create_entity(self, name: str, entity: abc.Object) -> abc.Object:
         return entity.__class__.from_dict(self.requester.post(f'entity/{name}',
                                                               entity.to_dict(omit_none=True)))
 
-    def _mass_create_entity(self, name, entities: list[abc.Object]) -> list[abc.Object]:
+    def _edit_entity(self, name, entity: abc.Object, uuid: UUID) -> abc.Object:
+        return entity.__class__.from_dict(self.requester.put(f'entity/{name}/{str(uuid)}',
+                                                             entity.to_dict(omit_none=True)))
+
+    def _mass_delete_entity(self, name: str, metas: list[Meta]) -> list[dict]:
+        return self.requester.post(f'entity/{name}/delete',
+                                   data=[{'meta': meta.to_dict(omit_none=True)} for meta in metas])
+
+    def _mass_create_entity(self, name: str, entities: list[abc.Object]) -> list[abc.Object]:
         raw_answer = self.requester.post(f'entity/{name}',
                                          [entity.to_dict(omit_none=True) for entity in entities])
         answer = []
