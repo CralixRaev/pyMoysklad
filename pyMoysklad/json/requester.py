@@ -67,7 +67,7 @@ class Requester:
     @_check_for_errors
     def delete(self, url: str):
         self.session.auth = self._auth
-        return self.session.delete(urljoin(ENDPOINT, url)).json()
+        return self.session.delete(urljoin(ENDPOINT, url))
 
     def __init__(self, auth: str | tuple[str, str]):
         self._auth: HTTPBasicAuth | TokenAuth

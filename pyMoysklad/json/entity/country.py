@@ -6,6 +6,9 @@ from pyMoysklad.json.meta import Meta
 from pyMoysklad.json.utils.types import DateTime, CollectionAnswer
 
 
+NAME = "country"
+
+
 @dataclass(repr=False)
 class Country(abc.Object):
     externalCode: str | None = None
@@ -22,13 +25,16 @@ class Country(abc.Object):
 
 class CountryMixin(abc.ObjectMixin):
     def list_country(self, **kwargs) -> CollectionAnswer:
-        return self._get_collection("entity/country", Country, **kwargs)
+        return self._get_collection(NAME, Country, **kwargs)
 
     def get_country(self, uuid: UUID) -> Country:
-        return self._get_entity("entity/country", Country, uuid)
+        return self._get_entity(NAME, Country, uuid)
 
     def create_country(self, countries: Country | list[Country]):
         if isinstance(countries, list):
-            return self._mass_create_entity("entity/country", countries)
+            return self._mass_create_entity(NAME, countries)
         else:
-            return self._create_entity("entity/country", countries)
+            return self._create_entity(NAME, countries)
+
+    def delete_country(self, uuid: UUID):
+        return self._delete_entity(NAME, uuid)
