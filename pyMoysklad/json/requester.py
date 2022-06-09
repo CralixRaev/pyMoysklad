@@ -28,8 +28,14 @@ class Requester:
         @functools.wraps(func)
         def wrap(self, *args, **kwargs):
             answer = func(self, *args, **kwargs)
-            if 'errors' in answer:
-                error = answer['errors'][0]
+            error = None
+            if isinstance(answer, list):
+                if any(map(lambda x: "errors" in x, answer)):
+                    error = answer[0]['errors'][0]
+            else:
+                if 'errors' in answer:
+                    error = answer['errors'][0]
+            if error:
                 if error['code'] in ERRORS:
                     raise ERRORS[error['code']](error['error'])
                 else:
@@ -45,7 +51,7 @@ class Requester:
         return self.session.get(urljoin(ENDPOINT, url), params=params).json()
 
     @_check_for_errors
-    def post(self, url: str, data: dict):
+    def post(self, url: str, data: dict | list):
         self.session.auth = self._auth
         return self.session.post(urljoin(ENDPOINT, url),
                                  data=json.dumps(data),

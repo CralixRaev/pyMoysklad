@@ -51,3 +51,11 @@ class JSONApi(CountryMixin,
 
     def _create_entity(self, url, entity: abc.Object) -> abc.Object:
         return entity.__class__.from_dict(self.requester.post(url, entity.to_dict(omit_none=True)))
+
+    def _mass_create_entity(self, url, entities: list[abc.Object]) -> list[abc.Object]:
+        raw_answer = self.requester.post(url, [entity.to_dict(omit_none=True) for entity in entities])
+        answer = []
+        print(raw_answer)
+        for raw_entity in raw_answer:
+            answer.append(entities[0].__class__.from_dict(raw_entity))
+        return answer

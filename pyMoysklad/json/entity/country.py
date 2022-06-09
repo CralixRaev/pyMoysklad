@@ -27,5 +27,8 @@ class CountryMixin(abc.ObjectMixin):
     def get_country(self, uuid: UUID) -> Country:
         return self._get_entity("entity/country", Country, uuid)
 
-    def create_country(self, country: Country):
-        return self._create_entity("entity/country", country)
+    def create_country(self, countries: Country | list[Country]):
+        if isinstance(countries, list):
+            return self._mass_create_entity("entity/country", countries)
+        else:
+            return self._create_entity("entity/country", countries)
