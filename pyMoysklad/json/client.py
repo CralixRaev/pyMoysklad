@@ -13,9 +13,31 @@ class JSONApi(CountryMixin,
     def __init__(self, auth: str | tuple[str, str]):
         self.requester = Requester(auth)
 
-    def _get_collection(self, url: str, entity: abc.Object) -> CollectionAnswer:
+    def _create_order(self, order: list[tuple[str, str]] = None) -> str | None:
+        if not order:
+            return None
+        answer = []
+        for elem in order:
+            if isinstance(elem, tuple):
+                answer.append(f"{elem[0]},{elem[1]}")
+            else:
+                answer.append(f"{elem}")
+        return ";".join(answer)
+
+    def _create_filter(self, filters: tuple[str] = None) -> str | None:
+        return ";".join(filters) if filters else None
+
+    def _get_collection(self, url: str, entity: abc.Object,
+                        order: list[tuple[str] | str] = None,
+                        filter: tuple[str] = None,
+                        search: str = None) -> CollectionAnswer:
         # TODO: реализовать листание
-        answer_raw = self.requester.get(url)
+        answer_raw = self.requester.get(url,
+                                        params={
+                                            'order': self._create_order(order),
+                                            'filter': self._create_filter(filter),
+                                            'search': search
+                                        })
         answer = CollectionAnswer(answer_raw['context'], MetaArray.from_dict(answer_raw['meta']),
                                   [entity.from_dict(row) for row in answer_raw['rows']])
         return answer

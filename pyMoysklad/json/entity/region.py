@@ -17,6 +17,5 @@ class Region(abc.Object):
 
 
 class RegionMixin(abc.ObjectMixin):
-    def list_region(self) -> CollectionAnswer:
-        return self._get_collection("entity/country", Region)
-
+    def list_region(self, **kwargs) -> CollectionAnswer:
+        return self._get_collection("entity/region", Region, **kwargs)

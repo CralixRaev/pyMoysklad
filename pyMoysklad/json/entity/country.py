@@ -21,5 +21,5 @@ class Country(abc.Object):
 
 
 class CountryMixin(abc.ObjectMixin):
-    def list_country(self) -> CollectionAnswer:
-        return self._get_collection("entity/country", Country)
+    def list_country(self, **kwargs) -> CollectionAnswer:
+        return self._get_collection("entity/country", Country, **kwargs)

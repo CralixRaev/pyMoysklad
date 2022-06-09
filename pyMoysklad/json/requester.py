@@ -36,16 +36,15 @@ class Requester:
                 if error['code'] in ERRORS:
                     raise ERRORS[error['code']](error['error'])
                 else:
-                    error = ApiError(error['error'])
-                    error.__code = error['code']
-                    raise error
+                    exception = ApiError(error['error'])
+                    raise exception
             return answer
         return wrap
 
     @_check_for_errors
-    def get(self, url: str):
+    def get(self, url: str, params: dict = None):
         self.session.auth = self._auth
-        return self.session.get(urljoin(ENDPOINT, url)).json()
+        return self.session.get(urljoin(ENDPOINT, url), params=params).json()
 
     @_check_for_errors
     def post(self, url: str, data: dict):

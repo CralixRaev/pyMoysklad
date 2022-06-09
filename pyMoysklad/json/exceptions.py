@@ -1,7 +1,11 @@
 class ApiError(Exception):
-    __code = None
+    code = None
+
+    def __init__(self, *args, code=None):
+        super().__init__(*args)
+        self.code = code
 
 
 class AuthError(ApiError):
-    __code = 1056
+    code = 1056
 
