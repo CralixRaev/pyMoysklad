@@ -1,5 +1,9 @@
+from collections import namedtuple
 from datetime import datetime
 from mashumaro.types import SerializableType
+
+
+CollectionAnswer = namedtuple("CollectionAnswer", ["context", "meta", "rows"])
 
 
 class DateTime(datetime, SerializableType):
@@ -16,3 +20,4 @@ class DateTime(datetime, SerializableType):
     @classmethod
     def _deserialize(cls, value: str):
         return datetime.strptime(value, "%Y-%m-%d %H:%M:%S.%f")
+
