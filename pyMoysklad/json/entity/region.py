@@ -16,9 +16,11 @@ class Region(abc.Object):
     code: str | None = None
 
 
-class RegionMixin(abc.ObjectMixin):
+class RegionMethods(abc.ObjectMethods):
+    NAME = "region"
+
     def list_region(self, **kwargs) -> CollectionAnswer[Region]:
-        return self._get_collection("entity/region", Region, **kwargs)
+        return self.client.get_collection(self.NAME, Region, **kwargs)
 
     def get_region(self, uuid: UUID) -> Region:
-        return self._get_entity("entity/region", Region, uuid)
+        return self.client.get_entity(self.NAME, Region, uuid)

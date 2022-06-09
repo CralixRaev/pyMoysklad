@@ -15,5 +15,6 @@ class Object(SkipDefaultFieldsReprMixin, DataClassJSONMixin):
         code_generation_options = [TO_DICT_ADD_OMIT_NONE_FLAG]
 
 
-class ObjectMixin:
-    pass
+class ObjectMethods:
+    def __init__(self, client):
+        self.client = client

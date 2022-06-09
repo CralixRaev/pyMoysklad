@@ -6,9 +6,6 @@ from pyMoysklad.json.meta import Meta
 from pyMoysklad.json.utils.types import DateTime, CollectionAnswer
 
 
-NAME = "country"
-
-
 @dataclass(repr=False)
 class Country(abc.Object):
     externalCode: str | None = None
@@ -23,24 +20,26 @@ class Country(abc.Object):
     accountId: UUID | None = None
 
 
-class CountryMixin(abc.ObjectMixin):
+class CountryMethods(abc.ObjectMethods):
+    NAME = "country"
+
     def list_country(self, **kwargs) -> CollectionAnswer:
-        return self._get_collection(NAME, Country, **kwargs)
+        return self.client.get_collection(self.NAME, Country, **kwargs)
 
     def get_country(self, uuid: UUID) -> Country:
-        return self._get_entity(NAME, Country, uuid)
+        return self.client.get_entity(self.NAME, Country, uuid)
 
     def create_country(self, countries: Country | list[Country]):
         if isinstance(countries, list):
-            return self._mass_create_entity(NAME, countries)
+            return self.client.mass_create_entity(self.NAME, countries)
         else:
-            return self._create_entity(NAME, countries)
+            return self.client.create_entity(self.NAME, countries)
 
     def delete_country(self, uuid: UUID):
-        return self._delete_entity(NAME, uuid)
+        return self.client.delete_entity(self.NAME, uuid)
 
     def edit_country(self, uuid, country: Country) -> Country:
-        return self._edit_entity(NAME, country, uuid)
+        return self.client.edit_entity(self.NAME, country, uuid)
 
     def mass_delete_country(self, metas: list[Meta]):
-        return self._mass_delete_entity(NAME, metas)
+        return self.client.mass_delete_entity(self.NAME, metas)

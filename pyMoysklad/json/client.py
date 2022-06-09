@@ -3,20 +3,23 @@ from urllib.parse import urljoin
 from uuid import UUID
 
 from pyMoysklad.json.entity import abc
-from pyMoysklad.json.entity.country import Country, CountryMixin
-from pyMoysklad.json.entity.region import RegionMixin
-from pyMoysklad.json.entity.subscription import SubscriptionMixin
+from pyMoysklad.json.entity.country import Country, CountryMethods
+from pyMoysklad.json.entity.region import RegionMethods
+from pyMoysklad.json.entity.subscription import SubscriptionMethods
 from pyMoysklad.json.meta import MetaArray, Meta
 from pyMoysklad.json.requester import Requester
 from pyMoysklad.json.utils.types import CollectionAnswer
 
 
-class JSONApi(CountryMixin,
-              RegionMixin,
-              SubscriptionMixin):
+class JSONApi:
     def __init__(self, auth: str | tuple[str, str]):
         self.requester: Requester = Requester(auth)
 
+        self.country = CountryMethods(self)
+        self.region = RegionMethods(self)
+        self.subscription = SubscriptionMethods(self)
+
+    @staticmethod
     def _create_order(self, order: list[tuple[str] | str] = None) -> str | None:
         if not order:
             return None
@@ -28,10 +31,11 @@ class JSONApi(CountryMixin,
                 answer.append(f"{elem}")
         return ";".join(answer)
 
+    @staticmethod
     def _create_filter(self, filters: tuple[str] = None) -> str | None:
         return ";".join(filters) if filters else None
 
-    def _get_collection(self, name: str, entity: Type[abc.Object],
+    def get_collection(self, name: str, entity: Type[abc.Object],
                         order: list[tuple[str] | str] = None,
                         filter: tuple[str] = None,
                         search: str = None) -> CollectionAnswer:
@@ -46,25 +50,25 @@ class JSONApi(CountryMixin,
                                   [entity.from_dict(row) for row in answer_raw['rows']])
         return answer
 
-    def _get_entity(self, name: str, entity: Type[abc.Object], uuid: UUID) -> abc.Object:
+    def get_entity(self, name: str, entity: Type[abc.Object], uuid: UUID) -> abc.Object:
         return entity.from_dict(self.requester.get(f'entity/{name}/{str(uuid)}'))
 
-    def _delete_entity(self, name: str, uuid: UUID) -> None:
+    def delete_entity(self, name: str, uuid: UUID) -> None:
         self.requester.delete(f'entity/{name}/{str(uuid)}')
 
-    def _create_entity(self, name: str, entity: abc.Object) -> abc.Object:
+    def create_entity(self, name: str, entity: abc.Object) -> abc.Object:
         return entity.__class__.from_dict(self.requester.post(f'entity/{name}',
                                                               entity.to_dict(omit_none=True)))
 
-    def _edit_entity(self, name, entity: abc.Object, uuid: UUID) -> abc.Object:
+    def edit_entity(self, name, entity: abc.Object, uuid: UUID) -> abc.Object:
         return entity.__class__.from_dict(self.requester.put(f'entity/{name}/{str(uuid)}',
                                                              entity.to_dict(omit_none=True)))
 
-    def _mass_delete_entity(self, name: str, metas: list[Meta]) -> list[dict]:
+    def mass_delete_entity(self, name: str, metas: list[Meta]) -> list[dict]:
         return self.requester.post(f'entity/{name}/delete',
                                    data=[{'meta': meta.to_dict(omit_none=True)} for meta in metas])
 
-    def _mass_create_entity(self, name: str, entities: list[abc.Object]) -> list[abc.Object]:
+    def mass_create_entity(self, name: str, entities: list[abc.Object]) -> list[abc.Object]:
         raw_answer = self.requester.post(f'entity/{name}',
                                          [entity.to_dict(omit_none=True) for entity in entities])
         answer = []

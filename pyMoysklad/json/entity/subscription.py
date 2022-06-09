@@ -30,8 +30,8 @@ class Subscription(abc.Object):
     isSubscriptionChangeAvailable: bool | None = None
 
 
-class SubscriptionMixin(abc.ObjectMixin):
+class SubscriptionMethods(abc.ObjectMethods):
     def get_subscription(self) -> Subscription:
-        answer_raw = self.requester.get("accountSettings/subscription")
+        answer_raw = self.client.requester.get("accountSettings/subscription")
         return Subscription.from_dict(answer_raw)
 
