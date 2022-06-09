@@ -62,7 +62,7 @@ class Requester:
         return self.session.delete(urljoin(ENDPOINT, url)).json()
 
     def __init__(self, auth: str | tuple[str, str]):
-        self._auth = None
+        self._auth: HTTPBasicAuth | TokenAuth
         if isinstance(auth, tuple):
             self._auth = HTTPBasicAuth(*auth)
         else:

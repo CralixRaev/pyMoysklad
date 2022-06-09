@@ -9,9 +9,11 @@ python = "^3.10"
 requests = "^2.27.1"
 requests-ratelimiter = "^0.3.2"
 mashumaro = "^3.0.3"
+types-requests = "^2.27.30"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
+mypy = "^0.961"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

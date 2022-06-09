@@ -11,9 +11,9 @@ class JSONApi(CountryMixin,
               RegionMixin,
               SubscriptionMixin):
     def __init__(self, auth: str | tuple[str, str]):
-        self.requester = Requester(auth)
+        self.requester: Requester = Requester(auth)
 
-    def _create_order(self, order: list[tuple[str, str]] = None) -> str | None:
+    def _create_order(self, order: list[tuple[str] | str] = None) -> str | None:
         if not order:
             return None
         answer = []

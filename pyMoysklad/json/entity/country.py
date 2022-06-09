@@ -8,16 +8,16 @@ from pyMoysklad.json.utils.types import DateTime, CollectionAnswer
 
 @dataclass(repr=False)
 class Country(abc.Object):
-    externalCode: str = None
-    id: UUID = None
-    name: str = None
-    updated: DateTime = None
-    code: str = None
-    description: str = None
-    group: Meta = None
-    owner: Meta = None
-    shared: bool = None
-    accountId: UUID = None
+    externalCode: str | None = None
+    id: UUID | None = None
+    name: str | None = None
+    updated: DateTime | None = None
+    code: str | None = None
+    description: str | None = None
+    group: Meta | None = None
+    owner: Meta | None = None
+    shared: bool | None = None
+    accountId: UUID | None = None
 
 
 class CountryMixin(abc.ObjectMixin):

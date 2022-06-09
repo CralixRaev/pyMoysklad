@@ -21,13 +21,13 @@ class TariffEnum(Enum):
 @dataclass(repr=False)
 class Subscription(abc.Object):
     # мойсклад... господи... ПОЧЕМУ???
-    subscriptionEndDate: datetime = field(default=None, metadata={
+    subscriptionEndDate: datetime | None = field(default=None, metadata={
         "deserialize": lambda l: datetime.utcfromtimestamp(l // 1000).replace(
             microsecond=l % 1000 * 1000)
     })
-    role: str = None
-    tariff: TariffEnum = None
-    isSubscriptionChangeAvailable: bool = None
+    role: str | None = None
+    tariff: TariffEnum | None = None
+    isSubscriptionChangeAvailable: bool | None = None
 
 
 class SubscriptionMixin(abc.ObjectMixin):

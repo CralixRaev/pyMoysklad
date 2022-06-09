@@ -1,7 +1,7 @@
 class ApiError(Exception):
-    code = None
+    code: int | None = None
 
-    def __init__(self, *args, code=None):
+    def __init__(self, *args, code: int | None = None):
         super().__init__(*args)
         self.code = code
 
