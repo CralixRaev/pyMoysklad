@@ -1,11 +1,9 @@
-from pyMoysklad.json.entity.country import Country
+from pyMoysklad.json.entity.country import Country, CountryMixin
+from pyMoysklad.json.entity.region import RegionMixin
 from pyMoysklad.json.requester import Requester
 
 
-class JSONApi:
+class JSONApi(CountryMixin,
+              RegionMixin):
     def __init__(self, auth: str | tuple[str, str]):
         self.requester = Requester(auth)
-
-    def list_countries(self) -> list[Country]:
-        answer = self.requester.get("entity/country")
-        return [Country.from_dict(country) for country in answer['rows']]

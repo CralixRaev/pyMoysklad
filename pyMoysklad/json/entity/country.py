@@ -17,3 +17,10 @@ class Country(abc.Object):
     group: Meta | None = None
     owner: Meta | None = None
     shared: bool | None = None
+    accountId: UUID | None = None
+
+
+class CountryMixin(abc.ObjectMixin):
+    def list_country(self):
+        answer = self.requester.get("entity/country")
+        return [Country.from_dict(row) for row in answer['rows']]

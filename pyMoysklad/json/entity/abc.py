@@ -8,3 +8,7 @@ from pyMoysklad.json.utils.mixins import SkipDefaultFieldsReprMixin
 @dataclass(repr=False)
 class Object(SkipDefaultFieldsReprMixin, DataClassJSONMixin):
     meta: Meta
+
+
+class ObjectMixin:
+    pass
