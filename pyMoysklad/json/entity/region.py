@@ -6,7 +6,7 @@ from pyMoysklad.json.utils.types import DateTime, CollectionAnswer
 
 
 @dataclass(repr=False)
-class Region(abc.Object):
+class Region(abc.Entity):
     externalCode: str | None = None
     id: UUID | None = None
     name: str | None = None

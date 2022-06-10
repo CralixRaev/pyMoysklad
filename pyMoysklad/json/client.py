@@ -4,6 +4,7 @@ from uuid import UUID
 
 from pyMoysklad.json.entity import abc
 from pyMoysklad.json.entity.country import Country, CountryMethods
+from pyMoysklad.json.entity.currency import CurrencyMethods
 from pyMoysklad.json.entity.region import RegionMethods
 from pyMoysklad.json.entity.subscription import SubscriptionMethods
 from pyMoysklad.json.meta import MetaArray, Meta
@@ -11,7 +12,7 @@ from pyMoysklad.json.requester import Requester
 from pyMoysklad.json.utils.types import CollectionAnswer
 
 
-T = TypeVar("T", bound=abc.Object)
+T = TypeVar("T", bound=abc.Entity)
 
 
 class JSONApi:
@@ -20,6 +21,7 @@ class JSONApi:
 
         self.country = CountryMethods(self)
         self.region = RegionMethods(self)
+        self.currency = CurrencyMethods(self)
         self.subscription = SubscriptionMethods(self)
 
     @staticmethod

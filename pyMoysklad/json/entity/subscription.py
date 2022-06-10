@@ -19,7 +19,7 @@ class TariffEnum(Enum):
 
 
 @dataclass(repr=False)
-class Subscription(abc.Object):
+class Subscription(abc.Entity):
     # мойсклад... господи... ПОЧЕМУ???
     subscriptionEndDate: datetime | None = field(default=None, metadata={
         "deserialize": lambda l: datetime.utcfromtimestamp(l // 1000).replace(

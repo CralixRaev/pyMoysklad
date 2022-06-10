@@ -9,10 +9,14 @@ from pyMoysklad.json.utils.mixins import SkipDefaultFieldsReprMixin
 
 @dataclass(repr=False)
 class Object(SkipDefaultFieldsReprMixin, DataClassJSONMixin):
-    meta: Meta = None
 
     class Config(BaseConfig):
         code_generation_options = [TO_DICT_ADD_OMIT_NONE_FLAG]
+
+
+@dataclass(repr=False)
+class Entity(Object):
+    meta: Meta = None
 
 
 class ObjectMethods:

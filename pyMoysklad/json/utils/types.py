@@ -4,9 +4,10 @@ from typing import TypeVar, Generic
 
 from mashumaro.types import SerializableType
 
+from pyMoysklad.json.entity import abc
 from pyMoysklad.json.meta import Meta
 
-T = TypeVar('T')
+T = TypeVar('T', bound=abc.Entity)
 
 
 class CollectionAnswer(Generic[T]):
