@@ -1,4 +1,4 @@
-from typing import Type
+from typing import Type, TypeVar
 from urllib.parse import urljoin
 from uuid import UUID
 
@@ -9,6 +9,9 @@ from pyMoysklad.json.entity.subscription import SubscriptionMethods
 from pyMoysklad.json.meta import MetaArray, Meta
 from pyMoysklad.json.requester import Requester
 from pyMoysklad.json.utils.types import CollectionAnswer
+
+
+T = TypeVar("T", bound=abc.Object)
 
 
 class JSONApi:
@@ -35,10 +38,10 @@ class JSONApi:
     def _create_filter(self, filters: tuple[str] = None) -> str | None:
         return ";".join(filters) if filters else None
 
-    def get_collection(self, name: str, entity: Type[abc.Object],
-                        order: list[tuple[str] | str] = None,
-                        filter: tuple[str] = None,
-                        search: str = None) -> CollectionAnswer:
+    def get_collection(self, name: str, entity: Type[T],
+                       order: list[tuple[str] | str] = None,
+                       filter: tuple[str] = None,
+                       search: str = None) -> CollectionAnswer:
         # TODO: реализовать листание
         answer_raw = self.requester.get(f'entity/{name}',
                                         params={
@@ -50,17 +53,17 @@ class JSONApi:
                                   [entity.from_dict(row) for row in answer_raw['rows']])
         return answer
 
-    def get_entity(self, name: str, entity: Type[abc.Object], uuid: UUID) -> abc.Object:
+    def get_entity(self, name: str, entity: Type[T], uuid: UUID) -> T:
         return entity.from_dict(self.requester.get(f'entity/{name}/{str(uuid)}'))
 
     def delete_entity(self, name: str, uuid: UUID) -> None:
         self.requester.delete(f'entity/{name}/{str(uuid)}')
 
-    def create_entity(self, name: str, entity: abc.Object) -> abc.Object:
+    def create_entity(self, name: str, entity: T) -> T:
         return entity.__class__.from_dict(self.requester.post(f'entity/{name}',
                                                               entity.to_dict(omit_none=True)))
 
-    def edit_entity(self, name, entity: abc.Object, uuid: UUID) -> abc.Object:
+    def edit_entity(self, name, entity: T, uuid: UUID) -> T:
         return entity.__class__.from_dict(self.requester.put(f'entity/{name}/{str(uuid)}',
                                                              entity.to_dict(omit_none=True)))
 
@@ -68,7 +71,7 @@ class JSONApi:
         return self.requester.post(f'entity/{name}/delete',
                                    data=[{'meta': meta.to_dict(omit_none=True)} for meta in metas])
 
-    def mass_create_entity(self, name: str, entities: list[abc.Object]) -> list[abc.Object]:
+    def mass_create_entity(self, name: str, entities: list[T]) -> list[T]:
         raw_answer = self.requester.post(f'entity/{name}',
                                          [entity.to_dict(omit_none=True) for entity in entities])
         answer = []
