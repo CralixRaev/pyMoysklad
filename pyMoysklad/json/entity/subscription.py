@@ -3,7 +3,7 @@ from datetime import datetime
 from enum import Enum
 from uuid import UUID
 
-from pyMoysklad.json.entity import abc
+from pyMoysklad.json.entity import object
 from pyMoysklad.json.utils.types import DateTime
 
 
@@ -19,7 +19,7 @@ class TariffEnum(Enum):
 
 
 @dataclass(repr=False)
-class Subscription(abc.Entity):
+class Subscription(object.Entity):
     # мойсклад... господи... ПОЧЕМУ???
     subscriptionEndDate: datetime | None = field(default=None, metadata={
         "deserialize": lambda l: datetime.utcfromtimestamp(l // 1000).replace(
@@ -30,7 +30,7 @@ class Subscription(abc.Entity):
     isSubscriptionChangeAvailable: bool | None = None
 
 
-class SubscriptionMethods(abc.ObjectMethods):
+class SubscriptionMethods(object.ObjectMethods):
     def get_subscription(self) -> Subscription:
         answer_raw = self.client.requester.get("accountSettings/subscription")
         return Subscription.from_dict(answer_raw)

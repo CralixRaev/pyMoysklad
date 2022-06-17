@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 from uuid import UUID
 
-from pyMoysklad.json.entity import abc
+from pyMoysklad.json.entity import object
 from pyMoysklad.json.meta import Meta
 from pyMoysklad.json.utils.types import DateTime, CollectionAnswer
 
 
 @dataclass(repr=False)
-class Country(abc.Entity):
+class Country(object.Entity):
     externalCode: str | None = None
     id: UUID | None = None
     name: str | None = None
@@ -20,7 +20,7 @@ class Country(abc.Entity):
     accountId: UUID | None = None
 
 
-class CountryMethods(abc.ObjectMethods):
+class CountryMethods(object.ObjectMethods):
     NAME = "country"
 
     def list_country(self, **kwargs) -> CollectionAnswer[Country]:

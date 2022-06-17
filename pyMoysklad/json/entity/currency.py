@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from enum import Enum
 from uuid import UUID
 
-from pyMoysklad.json.entity import abc
+from pyMoysklad.json.entity import object
 from pyMoysklad.json.meta import Meta
 from pyMoysklad.json.utils.types import DateTime, CollectionAnswer
 
@@ -13,7 +13,7 @@ class GenderEnum(Enum):
 
 
 @dataclass
-class Unit(abc.Object):
+class Unit(object.Object):
     gender: GenderEnum | None = None
     s1: str | None = None
     s2: str | None = None
@@ -31,7 +31,7 @@ class MinorUnit(Unit):
 
 
 @dataclass(repr=False)
-class Currency(abc.Entity):
+class Currency(object.Entity):
     archived: bool | None = None
     code: str | None = None
     default: bool | None = None
@@ -49,7 +49,7 @@ class Currency(abc.Entity):
     system: bool | None = None
 
 
-class CurrencyMethods(abc.ObjectMethods):
+class CurrencyMethods(object.ObjectMethods):
     NAME = "currency"
 
     def list_currency(self, **kwargs) -> CollectionAnswer[Currency]:

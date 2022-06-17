@@ -1,13 +1,14 @@
+from abc import ABC
 from collections import namedtuple
 from datetime import datetime
-from typing import TypeVar, Generic
+from typing import TypeVar, Generic, Any
 
-from mashumaro.types import SerializableType
+from mashumaro.types import SerializableType, SerializationStrategy
 
-from pyMoysklad.json.entity import abc
+from pyMoysklad.json.entity import object
 from pyMoysklad.json.meta import Meta
 
-T = TypeVar('T', bound=abc.Entity)
+T = TypeVar('T', bound=object.Entity)
 
 
 class CollectionAnswer(Generic[T]):
@@ -46,3 +47,14 @@ class DateTime(datetime, SerializableType):
     def _deserialize(cls, value: str):
         return datetime.strptime(value, "%Y-%m-%d %H:%M:%S.%f")
 
+
+# i hate moysklad
+class MetaInMeta(Meta, SerializableType):
+    def _serialize(self) -> dict:
+        return {
+            'meta': super()._serialize()
+        }
+
+    @classmethod
+    def _deserialize(cls, value: dict[str, dict]) -> Meta:
+        return Meta.from_dict(value['meta'])

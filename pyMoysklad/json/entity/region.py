@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from uuid import UUID
 
-from pyMoysklad.json.entity import abc
+from pyMoysklad.json.entity import object
 from pyMoysklad.json.utils.types import DateTime, CollectionAnswer
 
 
 @dataclass(repr=False)
-class Region(abc.Entity):
+class Region(object.Entity):
     externalCode: str | None = None
     id: UUID | None = None
     name: str | None = None
@@ -16,7 +16,7 @@ class Region(abc.Entity):
     code: str | None = None
 
 
-class RegionMethods(abc.ObjectMethods):
+class RegionMethods(object.ObjectMethods):
     NAME = "region"
 
     def list_region(self, **kwargs) -> CollectionAnswer[Region]:

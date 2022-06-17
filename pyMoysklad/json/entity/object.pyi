@@ -1,9 +1,11 @@
+from abc import ABC
+
 from mashumaro.mixins.json import DataClassJSONMixin
 
 from pyMoysklad.json.client import JSONApi
 
 
-class Object(DataClassJSONMixin): ...
+class Object(ABC, DataClassJSONMixin): ...
 class Entity(Object): ...
 class ObjectMethods:
     def __init__(self, client: JSONApi):

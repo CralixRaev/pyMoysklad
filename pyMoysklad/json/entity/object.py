@@ -1,3 +1,4 @@
+from abc import ABC
 from dataclasses import dataclass
 
 from mashumaro.config import BaseConfig, TO_DICT_ADD_OMIT_NONE_FLAG
@@ -8,7 +9,7 @@ from pyMoysklad.json.utils.mixins import SkipDefaultFieldsReprMixin
 
 
 @dataclass(repr=False)
-class Object(SkipDefaultFieldsReprMixin, DataClassJSONMixin):
+class Object(ABC, SkipDefaultFieldsReprMixin, DataClassJSONMixin):
 
     class Config(BaseConfig):
         code_generation_options = [TO_DICT_ADD_OMIT_NONE_FLAG]

@@ -2,9 +2,10 @@ from typing import Type, TypeVar
 from urllib.parse import urljoin
 from uuid import UUID
 
-from pyMoysklad.json.entity import abc
+from pyMoysklad.json.entity import object
 from pyMoysklad.json.entity.country import Country, CountryMethods
 from pyMoysklad.json.entity.currency import CurrencyMethods
+from pyMoysklad.json.entity.organization import OrganizationMethods
 from pyMoysklad.json.entity.region import RegionMethods
 from pyMoysklad.json.entity.subscription import SubscriptionMethods
 from pyMoysklad.json.meta import MetaArray, Meta
@@ -12,7 +13,7 @@ from pyMoysklad.json.requester import Requester
 from pyMoysklad.json.utils.types import CollectionAnswer
 
 
-T = TypeVar("T", bound=abc.Entity)
+T = TypeVar("T", bound=object.Entity)
 
 
 class JSONApi:
@@ -23,6 +24,7 @@ class JSONApi:
         self.region = RegionMethods(self)
         self.currency = CurrencyMethods(self)
         self.subscription = SubscriptionMethods(self)
+        self.organization = OrganizationMethods(self)
 
     @staticmethod
     def _create_order(self, order: list[tuple[str] | str] = None) -> str | None:
@@ -51,6 +53,7 @@ class JSONApi:
                                             'filter': self._create_filter(filter),
                                             'search': search
                                         })
+        print(answer_raw)
         answer = CollectionAnswer(answer_raw['context'], MetaArray.from_dict(answer_raw['meta']),
                                   [entity.from_dict(row) for row in answer_raw['rows']])
         return answer
