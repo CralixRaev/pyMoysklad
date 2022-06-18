@@ -2,17 +2,14 @@ from dataclasses import dataclass
 from uuid import UUID
 
 from pyMoysklad.json.entity import object
-from pyMoysklad.json.utils.types import DateTime, CollectionAnswer
+from pyMoysklad.json.utils.types import CollectionAnswer
 
 
 @dataclass(repr=False)
 class Region(object.Entity):
     externalCode: str | None = None
-    id: UUID | None = None
     name: str | None = None
-    updated: DateTime | None = None
     version: int | None = None
-    accountId: UUID | None = None
     code: str | None = None
 
 

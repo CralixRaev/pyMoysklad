@@ -27,7 +27,7 @@ class JSONApi:
         self.organization = OrganizationMethods(self)
 
     @staticmethod
-    def _create_order(self, order: list[tuple[str] | str] = None) -> str | None:
+    def _create_order(order: list[tuple[str] | str] = None) -> str | None:
         if not order:
             return None
         answer = []
@@ -39,7 +39,7 @@ class JSONApi:
         return ";".join(answer)
 
     @staticmethod
-    def _create_filter(self, filters: tuple[str] = None) -> str | None:
+    def _create_filter(filters: tuple[str] = None) -> str | None:
         return ";".join(filters) if filters else None
 
     def get_collection(self, name: str, entity: Type[T],
@@ -53,7 +53,6 @@ class JSONApi:
                                             'filter': self._create_filter(filter),
                                             'search': search
                                         })
-        print(answer_raw)
         answer = CollectionAnswer(answer_raw['context'], MetaArray.from_dict(answer_raw['meta']),
                                   [entity.from_dict(row) for row in answer_raw['rows']])
         return answer

@@ -4,7 +4,6 @@ from enum import Enum
 from uuid import UUID
 
 from pyMoysklad.json.entity import object
-from pyMoysklad.json.utils.types import DateTime
 
 
 class TariffEnum(Enum):
@@ -19,7 +18,7 @@ class TariffEnum(Enum):
 
 
 @dataclass(repr=False)
-class Subscription(object.Entity):
+class Subscription(object.Object):
     # мойсклад... господи... ПОЧЕМУ???
     subscriptionEndDate: datetime | None = field(default=None, metadata={
         "deserialize": lambda l: datetime.utcfromtimestamp(l // 1000).replace(

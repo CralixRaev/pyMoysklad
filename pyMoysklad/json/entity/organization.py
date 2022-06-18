@@ -4,7 +4,8 @@ from uuid import UUID
 
 from pyMoysklad.json.entity import object
 from pyMoysklad.json.meta import Meta, MetaArray
-from pyMoysklad.json.utils.types import DateTime, CollectionAnswer, MetaInMeta
+from pyMoysklad.json.utils.types import CollectionAnswer, MetaInMeta
+from pyMoysklad.json.utils.api_types.DateTime import DateTime
 
 
 class CompanyType(Enum):
@@ -87,14 +88,28 @@ class Organization(object.Entity):
     utmUrl: str | None = None
 
 
+@dataclass(repr=False)
+class Account(object.Entity):
+    accountNumber: str | None = None
+    agent: Meta | None = None
+    bankLocation: str | None = None
+    bankName: str | None = None
+    bic: str | None = None
+    correspondentAccount: str | None = None
+    isDefault: bool | None = None
+
+
 class OrganizationMethods(object.ObjectMethods):
     NAME = "organization"
 
     def list_organization(self, **kwargs) -> CollectionAnswer[Organization]:
         return self.client.get_collection(self.NAME, Organization, **kwargs)
 
-    def get_organization(self, uuid: UUID) -> Organization:
-        return self.client.get_entity(self.NAME, Organization, uuid)
+    def get_organization(self, uuid: UUID, get_accounts: bool = True) -> Organization:
+        organization = self.client.get_entity(self.NAME, Organization, uuid)
+        if get_accounts:
+            organization.accounts = self.client.get_collection(f"{self.NAME}/{uuid}/accounts", Account).rows
+        return organization
 
     def create_organization(self, organizations: Organization | list[Organization]):
         if isinstance(organizations, list):
@@ -110,3 +125,6 @@ class OrganizationMethods(object.ObjectMethods):
 
     def mass_delete_organization(self, metas: list[Meta]):
         return self.client.mass_delete_entity(self.NAME, metas)
+
+    def metadata_organization(self):
+        raise NotImplemented

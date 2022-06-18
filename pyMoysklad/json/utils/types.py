@@ -8,6 +8,7 @@ from mashumaro.types import SerializableType, SerializationStrategy
 from pyMoysklad.json.entity import object
 from pyMoysklad.json.meta import Meta
 
+
 T = TypeVar('T', bound=object.Entity)
 
 
@@ -30,22 +31,6 @@ class CollectionAnswer(Generic[T]):
 
     def __repr__(self) -> str:
         return self.__str__()
-
-
-class DateTime(datetime, SerializableType):
-    def _serialize(self) -> dict[str, int]:
-        return {
-            "year": self.year,
-            "month": self.month,
-            "day": self.day,
-            "hour": self.hour,
-            "minute": self.minute,
-            "second": self.second,
-        }
-
-    @classmethod
-    def _deserialize(cls, value: str):
-        return datetime.strptime(value, "%Y-%m-%d %H:%M:%S.%f")
 
 
 # i hate moysklad

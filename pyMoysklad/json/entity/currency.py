@@ -4,7 +4,7 @@ from uuid import UUID
 
 from pyMoysklad.json.entity import object
 from pyMoysklad.json.meta import Meta
-from pyMoysklad.json.utils.types import DateTime, CollectionAnswer
+from pyMoysklad.json.utils.types import CollectionAnswer
 
 
 class GenderEnum(Enum):
@@ -36,7 +36,6 @@ class Currency(object.Entity):
     code: str | None = None
     default: bool | None = None
     fullName: str | None = None
-    id: UUID | None = None
     indirect: bool | None = None
     isoCode: str | None = None
     majorUnit: MajorUnit | None = None

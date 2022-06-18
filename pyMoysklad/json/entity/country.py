@@ -3,21 +3,18 @@ from uuid import UUID
 
 from pyMoysklad.json.entity import object
 from pyMoysklad.json.meta import Meta
-from pyMoysklad.json.utils.types import DateTime, CollectionAnswer
+from pyMoysklad.json.utils.types import CollectionAnswer
 
 
 @dataclass(repr=False)
 class Country(object.Entity):
     externalCode: str | None = None
-    id: UUID | None = None
     name: str | None = None
-    updated: DateTime | None = None
     code: str | None = None
     description: str | None = None
     group: Meta | None = None
     owner: Meta | None = None
     shared: bool | None = None
-    accountId: UUID | None = None
 
 
 class CountryMethods(object.ObjectMethods):
