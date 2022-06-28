@@ -22,6 +22,7 @@ class Entity(Object):
     id: UUID = None
     updated: DateTime = None
     accountId: UUID | None = None
+    externalCode: str | None = None
 
 
 class ObjectMethods:

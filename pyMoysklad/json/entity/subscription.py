@@ -6,17 +6,6 @@ from uuid import UUID
 from pyMoysklad.json.entity import object
 
 
-class TariffEnum(Enum):
-    BASIC = "BASIC"
-    CORPORATE = "CORPORATE"
-    FREE = "FREE"
-    MINIMAL = "MINIMAL"
-    PROFESSIONAL = "PROFESSIONAL"
-    RETAIL = "RETAIL"
-    START = "START"
-    TRIAL = "TRIAL"
-
-
 @dataclass(repr=False)
 class Subscription(object.Object):
     # мойсклад... господи... ПОЧЕМУ???

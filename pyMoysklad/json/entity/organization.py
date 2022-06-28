@@ -3,28 +3,11 @@ from enum import Enum
 from uuid import UUID
 
 from pyMoysklad.json.entity import object
+from pyMoysklad.json.enums import CompanyType
 from pyMoysklad.json.meta import Meta, MetaArray
+from pyMoysklad.json.objects.address import Address
 from pyMoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 from pyMoysklad.json.utils.api_types.DateTime import DateTime
-
-
-class CompanyType(Enum):
-    LEGAL = "legal"
-    ENTREPRENEUR = "entrepreneur"
-    INDIVIDUAL = "individual"
-
-
-@dataclass(repr=False)
-class Address(object.Object):
-    addInfo: str | None = None
-    apartment: str | None = None
-    city: str | None = None
-    comment: str | None = None
-    country: MetaInMeta | None = None
-    house: str | None = None
-    postalCode: str | None = None
-    region: MetaInMeta | None = None
-    street: str | None = None
 
 
 @dataclass(repr=False)
@@ -45,10 +28,9 @@ class Organization(object.Entity):
     bonusPoints: int | None = None
     bonusProgram: MetaInMeta | None = None
     code: str | None = None
-    companyType: str | None = None
+    companyType: CompanyType | None = None
     created: DateTime | None = None
     description: str | None = None
-    externalCode: str | None = None
     group: MetaInMeta | None = None
     id: UUID | None = None
     name: str | None = None

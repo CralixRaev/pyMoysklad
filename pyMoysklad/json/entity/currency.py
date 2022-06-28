@@ -3,13 +3,9 @@ from enum import Enum
 from uuid import UUID
 
 from pyMoysklad.json.entity import object
+from pyMoysklad.json.enums import GenderEnum
 from pyMoysklad.json.meta import Meta
 from pyMoysklad.json.utils.types import CollectionAnswer
-
-
-class GenderEnum(Enum):
-    MASCULINE = "masculine"
-    FEMININE = "feminine"
 
 
 @dataclass

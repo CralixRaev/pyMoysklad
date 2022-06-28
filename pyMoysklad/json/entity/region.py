@@ -7,7 +7,6 @@ from pyMoysklad.json.utils.types import CollectionAnswer
 
 @dataclass(repr=False)
 class Region(object.Entity):
-    externalCode: str | None = None
     name: str | None = None
     version: int | None = None
     code: str | None = None
