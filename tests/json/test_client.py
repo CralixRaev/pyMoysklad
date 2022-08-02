@@ -3,7 +3,7 @@ import os
 import pytest
 import dotenv
 
-from pyMoysklad.json.client import JSONApi
+from pymoysklad.json.client import JSONApi
 
 dotenv.load_dotenv()
 

@@ -2,17 +2,17 @@ from typing import Type, TypeVar
 from urllib.parse import urljoin
 from uuid import UUID
 
-from pyMoysklad.json.entity import object
-from pyMoysklad.json.entity.country import Country, CountryMethods
-from pyMoysklad.json.entity.currency import CurrencyMethods
-from pyMoysklad.json.entity.organization import OrganizationMethods
-from pyMoysklad.json.entity.product import ProductMethods
-from pyMoysklad.json.entity.region import RegionMethods
-from pyMoysklad.json.entity.subscription import SubscriptionMethods
-from pyMoysklad.json.entity.variant import VariantMethods
-from pyMoysklad.json.meta import MetaArray, Meta
-from pyMoysklad.json.requester import Requester
-from pyMoysklad.json.utils.types import CollectionAnswer
+from pymoysklad.json.entity import object
+from pymoysklad.json.entity.country import Country, CountryMethods
+from pymoysklad.json.entity.currency import CurrencyMethods
+from pymoysklad.json.entity.organization import OrganizationMethods
+from pymoysklad.json.entity.product import ProductMethods
+from pymoysklad.json.entity.region import RegionMethods
+from pymoysklad.json.entity.subscription import SubscriptionMethods
+from pymoysklad.json.entity.variant import VariantMethods
+from pymoysklad.json.meta import MetaArray, Meta
+from pymoysklad.json.requester import Requester
+from pymoysklad.json.utils.types import CollectionAnswer
 
 
 T = TypeVar("T", bound=object.Entity)

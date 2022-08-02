@@ -5,9 +5,9 @@ from dataclasses import dataclass
 from mashumaro.config import BaseConfig, TO_DICT_ADD_OMIT_NONE_FLAG
 from mashumaro.mixins.json import DataClassJSONMixin
 
-from pyMoysklad.json.meta import Meta
-from pyMoysklad.json.utils.mixins import SkipDefaultFieldsReprMixin
-from pyMoysklad.json.utils.api_types.DateTime import DateTime
+from pymoysklad.json.meta import Meta
+from pymoysklad.json.utils.mixins import SkipDefaultFieldsReprMixin
+from pymoysklad.json.utils.api_types.DateTime import DateTime
 
 
 @dataclass(repr=False)

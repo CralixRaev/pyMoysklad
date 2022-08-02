@@ -2,13 +2,13 @@ from dataclasses import dataclass
 from enum import Enum
 from uuid import UUID
 
-from pyMoysklad.json.entity import object
-from pyMoysklad.json.enums import CompanyType
-from pyMoysklad.json.meta import Meta, MetaArray
-from pyMoysklad.json.objects.account import Account
-from pyMoysklad.json.objects.address import Address
-from pyMoysklad.json.utils.types import CollectionAnswer, MetaInMeta
-from pyMoysklad.json.utils.api_types.DateTime import DateTime
+from pymoysklad.json.entity import object
+from pymoysklad.json.enums import CompanyType
+from pymoysklad.json.meta import Meta, MetaArray
+from pymoysklad.json.objects.account import Account
+from pymoysklad.json.objects.address import Address
+from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
+from pymoysklad.json.utils.api_types.DateTime import DateTime
 
 
 @dataclass(repr=False)

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from uuid import UUID
 
-from pyMoysklad.json.entity import object
-from pyMoysklad.json.utils.types import CollectionAnswer
+from pymoysklad.json.entity import object
+from pymoysklad.json.utils.types import CollectionAnswer
 
 
 @dataclass(repr=False)

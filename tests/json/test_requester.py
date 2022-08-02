@@ -1,7 +1,7 @@
 import pytest
 
-from pyMoysklad.json.exceptions import AuthError
-from pyMoysklad.json.requester import Requester
+from pymoysklad.json.exceptions import AuthError
+from pymoysklad.json.requester import Requester
 
 
 class TestRequester:

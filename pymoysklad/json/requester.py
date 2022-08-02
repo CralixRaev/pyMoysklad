@@ -8,7 +8,7 @@ from pyrate_limiter import Limiter, RequestRate, Duration
 from requests.auth import HTTPBasicAuth
 from requests_ratelimiter import LimiterSession
 
-from pyMoysklad.json.exceptions import AuthError, ApiError, ERRORS
+from pymoysklad.json.exceptions import AuthError, ApiError, ERRORS
 
 ENDPOINT = "https://online.moysklad.ru/api/remap/1.2/"
 

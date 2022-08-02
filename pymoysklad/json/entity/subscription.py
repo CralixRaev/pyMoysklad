@@ -3,8 +3,8 @@ from datetime import datetime
 from enum import Enum
 from uuid import UUID
 
-from pyMoysklad.json.entity import object
-from pyMoysklad.json.enums import TariffEnum
+from pymoysklad.json.entity import object
+from pymoysklad.json.enums import TariffEnum
 
 
 @dataclass(repr=False)

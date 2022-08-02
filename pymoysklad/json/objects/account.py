@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from pyMoysklad.json.meta import Meta
-from pyMoysklad.json.utils.types import MetaInMeta
-from pyMoysklad.json.entity import object
+from pymoysklad.json.meta import Meta
+from pymoysklad.json.utils.types import MetaInMeta
+from pymoysklad.json.entity import object
 
 
 @dataclass(repr=False)

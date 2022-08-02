@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from mashumaro.config import BaseConfig, TO_DICT_ADD_OMIT_NONE_FLAG
 from mashumaro.mixins.json import DataClassJSONMixin
 
-from pyMoysklad.json.utils.mixins import SkipDefaultFieldsReprMixin
+from pymoysklad.json.utils.mixins import SkipDefaultFieldsReprMixin
 
 
 @dataclass(repr=False)

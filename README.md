@@ -1,4 +1,4 @@
-# pyMoysklad
+# pymoysklad
 WIP wrapper for Moysklad JSON API
 
 # Usage

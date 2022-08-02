@@ -5,8 +5,8 @@ from typing import TypeVar, Generic, Any
 
 from mashumaro.types import SerializableType, SerializationStrategy
 
-from pyMoysklad.json.entity import object
-from pyMoysklad.json.meta import Meta
+from pymoysklad.json.entity import object
+from pymoysklad.json.meta import Meta
 
 
 T = TypeVar('T', bound=object.Entity)

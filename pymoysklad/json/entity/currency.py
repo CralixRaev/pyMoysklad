@@ -2,10 +2,10 @@ from dataclasses import dataclass
 from enum import Enum
 from uuid import UUID
 
-from pyMoysklad.json.entity import object
-from pyMoysklad.json.enums import GenderEnum
-from pyMoysklad.json.meta import Meta
-from pyMoysklad.json.utils.types import CollectionAnswer
+from pymoysklad.json.entity import object
+from pymoysklad.json.enums import GenderEnum
+from pymoysklad.json.meta import Meta
+from pymoysklad.json.utils.types import CollectionAnswer
 
 
 @dataclass

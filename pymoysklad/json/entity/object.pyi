@@ -2,7 +2,7 @@ from abc import ABC
 
 from mashumaro.mixins.json import DataClassJSONMixin
 
-from pyMoysklad.json.client import JSONApi
+from pymoysklad.json.client import JSONApi
 
 
 class Object(ABC, DataClassJSONMixin): ...
