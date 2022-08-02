@@ -9,6 +9,7 @@ from pyMoysklad.json.entity.organization import OrganizationMethods
 from pyMoysklad.json.entity.product import ProductMethods
 from pyMoysklad.json.entity.region import RegionMethods
 from pyMoysklad.json.entity.subscription import SubscriptionMethods
+from pyMoysklad.json.entity.variant import VariantMethods
 from pyMoysklad.json.meta import MetaArray, Meta
 from pyMoysklad.json.requester import Requester
 from pyMoysklad.json.utils.types import CollectionAnswer
@@ -27,6 +28,7 @@ class JSONApi:
         self.subscription = SubscriptionMethods(self)
         self.organization = OrganizationMethods(self)
         self.product = ProductMethods(self)
+        self.variant = VariantMethods(self)
 
     @staticmethod
     def _create_order(order: list[tuple[str] | str] = None) -> str | None:
