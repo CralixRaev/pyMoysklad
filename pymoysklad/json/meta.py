@@ -19,7 +19,7 @@ class Meta(DataClassJSONMixin, SkipDefaultFieldsReprMixin):
         code_generation_options = [TO_DICT_ADD_OMIT_NONE_FLAG]
 
 
-@dataclass
+@dataclass(repr=False)
 class MetaArray(Meta):
     size: int | None = None
     limit: int | None = None

@@ -87,7 +87,7 @@ class SupplyMethods(object.ObjectMethods):
     def list_supply_positions(self, uuid: UUID, **kwargs) -> CollectionAnswer[SupplyPosition]:
         return self.client.get_collection(f'{self.NAME}/{uuid}/positions', SupplyPosition, **kwargs)
 
-    def create_supply_positions(self, supply_uuid: UUID, positions: Supply | list[Supply]):
+    def create_supply_positions(self, supply_uuid: UUID, positions: SupplyPosition | list[SupplyPosition]):
         if isinstance(positions, list):
             return self.client.mass_create_entity(f'{self.NAME}/{supply_uuid}/positions', positions)
         else:
