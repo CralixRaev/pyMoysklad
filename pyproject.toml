@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pymoysklad"
-version = "0.1.3.2"
+version = "0.1.3.3"
 description = "very-WIP wrapper for Moysklad JSON API"
 authors = ["Anatoly Raev <cralixraev@gmail.com>"]
 
