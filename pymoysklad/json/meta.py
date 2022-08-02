@@ -15,6 +15,9 @@ class Meta(DataClassJSONMixin, SkipDefaultFieldsReprMixin):
     mediaType: str | None = "application/json"
     uuidHref: str | None = None
 
+    def _serialize(self) -> dict:
+        return self.to_dict()
+
     class Config(BaseConfig):
         code_generation_options = [TO_DICT_ADD_OMIT_NONE_FLAG]
 
