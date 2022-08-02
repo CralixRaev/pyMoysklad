@@ -37,7 +37,7 @@ class CollectionAnswer(Generic[T]):
 class MetaInMeta(Meta, SerializableType):
     def _serialize(self) -> dict:
         return {
-            'meta': super()._serialize()
+            'meta': super().to_dict()
         }
 
     @classmethod
