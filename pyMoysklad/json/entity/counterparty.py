@@ -5,6 +5,7 @@ from pyMoysklad.json.entity import object
 from pyMoysklad.json.enums import CompanyType
 from pyMoysklad.json.meta import MetaArray, Meta
 from pyMoysklad.json.objects.address import Address
+from pyMoysklad.json.utils.api_types.DateTime import DateTime
 from pyMoysklad.json.utils.types import CollectionAnswer
 
 
@@ -30,6 +31,24 @@ class Counterparty(object.Entity):
     salesAmount: int | None = None
     state: Meta | None = None
     syncId: UUID | None = None
+    certificateDate: DateTime | None = None
+    certificateNumber: str | None = None
+    contactpersons: MetaArray | None = None
+    # discounts: str | None = None
+    inn: str | None = None
+    kpp: str | None = None
+    legalAddress: str | None = None
+    legalAddressFull: Address | None = None
+    legalFirstName: str | None = None
+    legalLastName: str | None = None
+    legalMiddleName: str | None = None
+    legalTitle: str | None = None
+    notes: MetaArray | None = None
+    ogrn: str | None = None
+    ogrnip: str | None = None
+    okpo: str | None = None
+    priceType: str = None # TODO: PRICE OBJECT
+    tags: list[str] | None = None
 
 
 class CounterpartyMethods(object.ObjectMethods):

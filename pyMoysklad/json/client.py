@@ -6,6 +6,7 @@ from pyMoysklad.json.entity import object
 from pyMoysklad.json.entity.country import Country, CountryMethods
 from pyMoysklad.json.entity.currency import CurrencyMethods
 from pyMoysklad.json.entity.organization import OrganizationMethods
+from pyMoysklad.json.entity.product import ProductMethods
 from pyMoysklad.json.entity.region import RegionMethods
 from pyMoysklad.json.entity.subscription import SubscriptionMethods
 from pyMoysklad.json.meta import MetaArray, Meta
@@ -25,6 +26,7 @@ class JSONApi:
         self.currency = CurrencyMethods(self)
         self.subscription = SubscriptionMethods(self)
         self.organization = OrganizationMethods(self)
+        self.product = ProductMethods(self)
 
     @staticmethod
     def _create_order(order: list[tuple[str] | str] = None) -> str | None:

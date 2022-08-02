@@ -5,6 +5,7 @@ from uuid import UUID
 from pyMoysklad.json.entity import object
 from pyMoysklad.json.enums import CompanyType
 from pyMoysklad.json.meta import Meta, MetaArray
+from pyMoysklad.json.objects.account import Account
 from pyMoysklad.json.objects.address import Address
 from pyMoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 from pyMoysklad.json.utils.api_types.DateTime import DateTime
@@ -43,7 +44,7 @@ class Organization(object.Entity):
     certificateDate: DateTime | None = None
     certificateNumber: str | None = None
     chiefAccountant: str | None = None
-    accounts: MetaArray | None = None
+    accounts: MetaArray | Account | None = None
     attributes: list[Meta] | None = None
     chiefAccountSign: SignStamp | None = None
     directorSign: SignStamp | None = None
@@ -68,17 +69,6 @@ class Organization(object.Entity):
     phone: str | None = None
     stamp: str | None = None
     utmUrl: str | None = None
-
-
-@dataclass(repr=False)
-class Account(object.Entity):
-    accountNumber: str | None = None
-    agent: Meta | None = None
-    bankLocation: str | None = None
-    bankName: str | None = None
-    bic: str | None = None
-    correspondentAccount: str | None = None
-    isDefault: bool | None = None
 
 
 class OrganizationMethods(object.ObjectMethods):
