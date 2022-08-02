@@ -10,6 +10,19 @@ from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 
 
 @dataclass(repr=False)
+class SupplyPosition(object.Entity):
+    quantity: float | int | None = None
+    price: float | int | None = None
+    discount: float | int | None = None
+    vat: float | int | None = None
+    vatEnabled: bool | None = None
+    assortment: MetaInMeta | None = None
+    # gtd: ...
+    country: MetaInMeta | None = None
+    overhead: float | int | None = None
+
+
+@dataclass(repr=False)
 class Supply(object.Entity):
     agent: MetaInMeta | None = None
     agentAccount: MetaInMeta | None = None
@@ -56,17 +69,26 @@ class SupplyMethods(object.ObjectMethods):
     def get_supply(self, uuid: UUID) -> Supply:
         return self.client.get_entity(self.NAME, Supply, uuid)
 
-    def create_supply(self, currencies: Supply | list[Supply]):
-        if isinstance(currencies, list):
-            return self.client.mass_create_entity(self.NAME, currencies)
+    def create_supply(self, supplies: Supply | list[Supply]):
+        if isinstance(supplies, list):
+            return self.client.mass_create_entity(self.NAME, supplies)
         else:
-            return self.client.create_entity(self.NAME, currencies)
+            return self.client.create_entity(self.NAME, supplies)
 
     def delete_supply(self, uuid: UUID):
         return self.client.delete_entity(self.NAME, uuid)
 
-    def edit_supply(self, uuid, currency: Supply) -> Supply:
-        return self.client.edit_entity(self.NAME, currency, uuid)
+    def edit_supply(self, uuid, supply: Supply) -> Supply:
+        return self.client.edit_entity(self.NAME, supply, uuid)
 
     def mass_delete_supply(self, metas: list[Meta]):
         return self.client.mass_delete_entity(self.NAME, metas)
+
+    def list_supply_positions(self, uuid: UUID, **kwargs) -> CollectionAnswer[SupplyPosition]:
+        return self.client.get_collection(f'{self.NAME}/{uuid}/positions', SupplyPosition, **kwargs)
+
+    def create_supply_positions(self, supply_uuid: UUID, positions: Supply | list[Supply]):
+        if isinstance(positions, list):
+            return self.client.mass_create_entity(f'{self.NAME}/{supply_uuid}/positions', positions)
+        else:
+            return self.client.create_entity(f'{self.NAME}/{supply_uuid}/positions', positions)
