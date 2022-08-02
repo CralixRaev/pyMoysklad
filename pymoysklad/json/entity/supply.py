@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 from uuid import UUID
 
@@ -16,7 +16,11 @@ class SupplyPosition(object.Entity):
     discount: float | int | None = None
     vat: float | int | None = None
     vatEnabled: bool | None = None
-    assortment: MetaInMeta | None = None
+    assortment: field(
+        metadata={
+            "serialize": lambda v: {'meta': v.to_dict()}
+        }
+    ) | None = None
     # gtd: ...
     country: MetaInMeta | None = None
     overhead: float | int | None = None
