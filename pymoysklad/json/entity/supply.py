@@ -10,8 +10,10 @@ from pymoysklad.json.meta import Meta, MetaArray
 from pymoysklad.json.utils.api_types.DateTime import DateTime
 from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 
+
 # TODO: Refactor (create some common functions for working with documents and expand)
 def product_or_variant(raw: dict) -> Product | Variant:
+    print(raw["images"])
     if raw['meta']['type'] == Product:
         return Product.from_dict(raw)
     else:
