@@ -52,13 +52,13 @@ class JSONApi:
     def get_collection(self, name: str, entity: Type[T],
                        order: list[tuple[str] | str] = None,
                        filter: tuple[str] = None,
-                       search: str = None) -> CollectionAnswer:
+                       search: str = None, expand: str = None) -> CollectionAnswer:
         # TODO: реализовать листание
         answer_raw = self.requester.get(f'entity/{name}',
                                         params={
                                             'order': self._create_order(order),
                                             'filter': self._create_filter(filter),
-                                            'search': search
+                                            'search': search, 'expand': expand
                                         })
         answer = CollectionAnswer(answer_raw['context'], MetaArray.from_dict(answer_raw['meta']),
                                   [entity.from_dict(row) for row in answer_raw['rows']])
