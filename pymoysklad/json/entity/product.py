@@ -5,6 +5,7 @@ from uuid import UUID
 from pymoysklad.json.entity import object
 from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta, MetaArray
+from pymoysklad.json.objects.images import Image
 from pymoysklad.json.utils.types import CollectionAnswer
 
 
@@ -24,7 +25,7 @@ class Product(object.Entity):
     effectiveVatEnabled: bool | None = None
     files: MetaArray | None = None
     group: Meta | None = None
-    images: MetaArray | None = None
+    images: CollectionAnswer[Image] | MetaArray | None = None
     isSerialTrackable: bool | None = None
     # minPrice: ...
     minimumBalance: int | None = None

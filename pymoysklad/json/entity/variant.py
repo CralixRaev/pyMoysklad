@@ -5,6 +5,7 @@ from uuid import UUID
 from pymoysklad.json.entity import object
 from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta, MetaArray
+from pymoysklad.json.objects.images import Image
 from pymoysklad.json.utils.types import CollectionAnswer
 
 
@@ -17,7 +18,7 @@ class Variant(object.Entity):
     # characteristics: ...
     code: str | None = None
     discountProhibited: bool | None = None
-    images: MetaArray | None = None
+    images: CollectionAnswer[Image] | MetaArray | None = None
     # minPrice: ...
     name: str | None = None
     # packs: ...

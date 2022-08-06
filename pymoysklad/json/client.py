@@ -11,7 +11,7 @@ from pymoysklad.json.entity.region import RegionMethods
 from pymoysklad.json.entity.subscription import SubscriptionMethods
 from pymoysklad.json.entity.supply import SupplyMethods
 from pymoysklad.json.entity.variant import VariantMethods
-from pymoysklad.json.meta import MetaArray, Meta
+from pymoysklad.json.meta import MetaArray, Meta, MetaArray
 from pymoysklad.json.requester import Requester
 from pymoysklad.json.utils.types import CollectionAnswer
 
@@ -60,8 +60,9 @@ class JSONApi:
                                             'filter': self._create_filter(filter),
                                             'search': search, 'expand': expand
                                         })
-        answer = CollectionAnswer(answer_raw['context'], MetaArray.from_dict(answer_raw['meta']),
-                                  [entity.from_dict(row) for row in answer_raw['rows']])
+        answer = CollectionAnswer(MetaArray.from_dict(answer_raw['meta']),
+                                  [entity.from_dict(row) for row in answer_raw['rows']],
+                                  answer_raw['context'])
         return answer
 
     def get_entity(self, name: str, entity: Type[T], uuid: UUID) -> T:

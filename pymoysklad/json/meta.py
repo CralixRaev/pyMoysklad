@@ -1,8 +1,9 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+
 
 from mashumaro.config import BaseConfig, TO_DICT_ADD_OMIT_NONE_FLAG
 from mashumaro.mixins.json import DataClassJSONMixin
-from mashumaro.types import SerializableType
+from mashumaro.types import SerializableType, GenericSerializableType
 
 from pymoysklad.json.utils.mixins import SkipDefaultFieldsReprMixin
 
@@ -24,19 +25,9 @@ class Meta(DataClassJSONMixin, SkipDefaultFieldsReprMixin):
 
 
 @dataclass(repr=False)
-class _MetaArray(Meta):
+class MetaArray(Meta):
     size: int | None = None
     limit: int | None = None
     offset: int | None = None
     nextHref: str | None = None
     previousHref: str | None = None
-
-
-class MetaArray(_MetaArray, SerializableType):
-    def _serialize(self) -> dict[str, dict]:
-        return {"meta": super().to_dict()}
-
-    @classmethod
-    def _deserialize(cls, value: dict[str, dict]) -> 'MetaArray':
-        return MetaArray.from_dict(value['meta'])
-
