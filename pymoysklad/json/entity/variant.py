@@ -3,10 +3,11 @@ from enum import Enum
 from uuid import UUID
 
 from pymoysklad.json.entity import object
+from pymoysklad.json.entity.product import Product
 from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta, MetaArray
 from pymoysklad.json.objects.images import Image
-from pymoysklad.json.utils.types import CollectionAnswer
+from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 
 
 @dataclass(repr=False)
@@ -22,7 +23,7 @@ class Variant(object.Entity):
     # minPrice: ...
     name: str | None = None
     # packs: ...
-    product: Meta | None = None
+    product: Product | MetaInMeta | None = None
     # salePrices: ...
     things: list[str] | None = None
 
