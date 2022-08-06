@@ -3,6 +3,7 @@ from enum import Enum
 from uuid import UUID
 
 from pymoysklad.json.entity import object
+from pymoysklad.json.entity.counterparty import Counterparty
 from pymoysklad.json.entity.product import Product
 from pymoysklad.json.entity.variant import Variant
 from pymoysklad.json.enums import GenderEnum
@@ -40,7 +41,7 @@ class SupplyPosition(object.Entity):
 
 @dataclass(repr=False)
 class Supply(object.Entity):
-    agent: MetaInMeta | None = None
+    agent: Counterparty | MetaInMeta | None = None
     agentAccount: MetaInMeta | None = None
     applicable: bool | None = None
     # attributes: ...
