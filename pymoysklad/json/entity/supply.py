@@ -14,7 +14,7 @@ from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 # TODO: Refactor (create some common functions for working with documents and expand)
 def product_or_variant(raw: dict) -> Product | Variant:
     print(raw["images"])
-    if raw['meta']['type'] == Product:
+    if raw['meta']['type'] == 'product':
         return Product.from_dict(raw)
     else:
         return Variant.from_dict(raw)
