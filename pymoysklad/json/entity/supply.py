@@ -115,3 +115,4 @@ class SupplyMethods(object.ObjectMethods):
             return self.client.mass_create_entity(f'{self.NAME}/{supply_uuid}/positions', positions)
         else:
             return self.client.create_entity(f'{self.NAME}/{supply_uuid}/positions', positions)
+    

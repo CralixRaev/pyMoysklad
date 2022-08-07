@@ -46,9 +46,13 @@ class Requester:
         return wrap
 
     @_check_for_errors
-    def get(self, url: str, params: dict = None):
+    def get(self, url: str, params: dict = None, raw=False):
         self.session.auth = self._auth
-        return self.session.get(urljoin(ENDPOINT, url), params=params).json()
+        answer = self.session.get(urljoin(ENDPOINT, url), params=params)
+        if raw:
+            return answer
+        return answer.json()
+
 
     @_check_for_errors
     def post(self, url: str, data: dict | list):
