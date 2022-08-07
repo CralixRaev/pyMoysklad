@@ -2,6 +2,8 @@ from dataclasses import dataclass, field
 from enum import Enum
 from uuid import UUID
 
+import mashumaro.exceptions
+
 from pymoysklad.json.entity import object
 from pymoysklad.json.entity.counterparty import Counterparty
 from pymoysklad.json.entity.product import Product
@@ -13,11 +15,14 @@ from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 
 
 # TODO: Refactor (create some common functions for working with documents and expand)
-def product_or_variant(raw: dict) -> Product | Variant:
-    if raw['meta']['type'] == 'product':
-        return Product.from_dict(raw)
-    else:
-        return Variant.from_dict(raw)
+def product_or_variant(raw: dict) -> Product | Variant | Meta:
+    try:
+        if raw['meta']['type'] == 'product':
+            return Product.from_dict(raw)
+        else:
+            return Variant.from_dict(raw)
+    except mashumaro.exceptions.MissingField:
+        return Meta.from_dict(raw['meta'])
 
 
 @dataclass(repr=False)
@@ -27,7 +32,7 @@ class SupplyPosition(object.Entity):
     discount: float | int | None = None
     vat: float | int | None = None
     vatEnabled: bool | None = None
-    assortment: Meta | Product | Variant | None = field(
+    assortment: MetaInMeta | Product | Variant | None = field(
         metadata={
             "serialize": lambda v: {'meta': v.to_dict()},
             "deserialize": product_or_variant
