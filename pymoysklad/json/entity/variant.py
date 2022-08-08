@@ -7,6 +7,7 @@ from pymoysklad.json.entity.product import Product
 from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta, MetaArray
 from pymoysklad.json.objects.images import Image
+from pymoysklad.json.objects.sale_price import SalePrice
 from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 
 
@@ -24,7 +25,7 @@ class Variant(object.Entity):
     name: str | None = None
     # packs: ...
     product: Product | MetaInMeta | None = None
-    # salePrices: ...
+    salePrices: list[SalePrice] | None = None
     things: list[str] | None = None
 
 

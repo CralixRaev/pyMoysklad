@@ -6,6 +6,7 @@ from pymoysklad.json.entity import object
 from pymoysklad.json.entity.country import Country, CountryMethods
 from pymoysklad.json.entity.currency import CurrencyMethods
 from pymoysklad.json.entity.organization import OrganizationMethods
+from pymoysklad.json.entity.pricetype import PriceTypeMethods
 from pymoysklad.json.entity.product import ProductMethods
 from pymoysklad.json.entity.region import RegionMethods
 from pymoysklad.json.entity.subscription import SubscriptionMethods
@@ -30,6 +31,7 @@ class JSONApi:
         self.organization = OrganizationMethods(self)
         self.product = ProductMethods(self)
         self.variant = VariantMethods(self)
+        self.price_type = PriceTypeMethods(self)
 
         self.supply = SupplyMethods(self)
 
@@ -53,9 +55,10 @@ class JSONApi:
                        order: list[tuple[str] | str] = None,
                        filter: tuple[str] = None,
                        search: str = None, expand: str = None,
-                       limit: int = None, offset: int = None) -> CollectionAnswer:
+                       limit: int = None, offset: int = None,
+                       resource_name: str = "entity") -> CollectionAnswer:
         # TODO: реализовать листание
-        answer_raw = self.requester.get(f'entity/{name}',
+        answer_raw = self.requester.get(f'{resource_name}/{name}',
                                         params={
                                             'order': self._create_order(order),
                                             'filter': self._create_filter(filter),
@@ -67,26 +70,26 @@ class JSONApi:
                                   answer_raw['context'])
         return answer
 
-    def get_entity(self, name: str, entity: Type[T], uuid: UUID) -> T:
-        return entity.from_dict(self.requester.get(f'entity/{name}/{str(uuid)}'))
+    def get_entity(self, name: str, entity: Type[T], uuid: UUID | str, resource_name: str = "entity") -> T:
+        return entity.from_dict(self.requester.get(f'{resource_name}/{name}/{str(uuid)}'))
 
     def delete_entity(self, name: str, uuid: UUID) -> None:
         self.requester.delete(f'entity/{name}/{str(uuid)}')
 
-    def create_entity(self, name: str, entity: T) -> T:
-        return entity.__class__.from_dict(self.requester.post(f'entity/{name}',
+    def create_entity(self, name: str, entity: T, resource_name: str = "entity") -> T:
+        return entity.__class__.from_dict(self.requester.post(f'{resource_name}/{name}',
                                                               entity.to_dict(omit_none=True)))
 
-    def edit_entity(self, name, entity: T, uuid: UUID) -> T:
-        return entity.__class__.from_dict(self.requester.put(f'entity/{name}/{str(uuid)}',
+    def edit_entity(self, name, entity: T, uuid: UUID, resource_name: str = "entity") -> T:
+        return entity.__class__.from_dict(self.requester.put(f'{resource_name}/{name}/{str(uuid)}',
                                                              entity.to_dict(omit_none=True)))
 
     def mass_delete_entity(self, name: str, metas: list[Meta]) -> list[dict]:
-        return self.requester.post(f'entity/{name}/delete',
+        return self.requester.post(f'{resource_name}/{name}/delete',
                                    data=[{'meta': meta.to_dict(omit_none=True)} for meta in metas])
 
-    def mass_create_entity(self, name: str, entities: list[T]) -> list[T]:
-        raw_answer = self.requester.post(f'entity/{name}',
+    def mass_create_entity(self, name: str, entities: list[T], resource_name: str = "entity") -> list[T]:
+        raw_answer = self.requester.post(f'{resource_name}/{name}',
                                          [entity.to_dict(omit_none=True) for entity in entities])
         answer = []
         for raw_entity in raw_answer:

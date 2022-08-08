@@ -3,9 +3,11 @@ from enum import Enum
 from uuid import UUID
 
 from pymoysklad.json.entity import object
+from pymoysklad.json.entity.currency import Currency
 from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta, MetaArray
 from pymoysklad.json.objects.images import Image
+from pymoysklad.json.objects.sale_price import SalePrice
 from pymoysklad.json.utils.types import CollectionAnswer
 
 
@@ -37,7 +39,7 @@ class Product(object.Entity):
     paymentItemType: str | None = None  # TODO: create enum
     ppeType: str | None = None  # TODO: create enum
     productFolder: Meta | None = None
-    # salePrices: ...
+    salePrices: list[SalePrice] | None = None
     shared: bool | None = None
     supplier: Meta | None = None
     syncId: UUID | None = None
