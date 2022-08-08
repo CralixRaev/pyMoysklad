@@ -18,8 +18,8 @@ class Object(ABC, SkipDefaultFieldsReprMixin, DataClassJSONMixin):
 
 @dataclass(repr=False)
 class Entity(Object):
-    meta: Meta
-    id: UUID
+    meta: Meta | None = None
+    id: UUID | None = None
     updated: DateTime = None
     accountId: UUID | None = None
     externalCode: str | None = None
