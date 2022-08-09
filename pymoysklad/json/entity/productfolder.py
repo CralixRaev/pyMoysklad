@@ -45,7 +45,7 @@ class ProductFolderMethods(object.ObjectMethods):
         return self.client.delete_entity(self.NAME, uuid)
 
     def edit_product_folder(self, uuid, product_folder: ProductFolder) -> ProductFolder:
-        return self.client.edit_entity(self.NAME, productfolder, uuid)
+        return self.client.edit_entity(self.NAME, product_folder, uuid)
 
     def mass_delete_product_folder(self, metas: list[Meta]):
         return self.client.mass_delete_entity(self.NAME, metas)
