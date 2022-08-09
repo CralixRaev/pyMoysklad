@@ -6,6 +6,7 @@ from pymoysklad.json.entity import object
 from pymoysklad.json.entity.currency import Currency
 from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta, MetaArray
+from pymoysklad.json.objects.barcode import Barcode
 from pymoysklad.json.objects.images import Image
 from pymoysklad.json.objects.sale_price import SalePrice
 from pymoysklad.json.utils.types import CollectionAnswer
@@ -17,7 +18,7 @@ class Product(object.Entity):
     archived: bool | None = None
     article: str | None = None
     # attributes: ...
-    # barcodes: ...
+    barcodes: list[Barcode] | None = None
     # buyPrice: ...
     code: str | None = None
     country: Meta | None = None

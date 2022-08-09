@@ -6,6 +6,7 @@ from pymoysklad.json.entity import object
 from pymoysklad.json.entity.product import Product
 from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta, MetaArray
+from pymoysklad.json.objects.barcode import Barcode
 from pymoysklad.json.objects.images import Image
 from pymoysklad.json.objects.sale_price import SalePrice
 from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
@@ -15,7 +16,7 @@ from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 class Variant(object.Entity):
     archived: bool | None = None
     article: str | None = None
-    # barcodes: ...
+    barcodes: list[Barcode] | None = None
     # buyPrice: ...
     # characteristics: ...
     code: str | None = None
