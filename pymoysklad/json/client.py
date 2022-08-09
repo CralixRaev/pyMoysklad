@@ -8,6 +8,7 @@ from pymoysklad.json.entity.currency import CurrencyMethods
 from pymoysklad.json.entity.organization import OrganizationMethods
 from pymoysklad.json.entity.pricetype import PriceTypeMethods
 from pymoysklad.json.entity.product import ProductMethods
+from pymoysklad.json.entity.productfolder import ProductFolderMethods
 from pymoysklad.json.entity.region import RegionMethods
 from pymoysklad.json.entity.subscription import SubscriptionMethods
 from pymoysklad.json.entity.supply import SupplyMethods
@@ -32,6 +33,7 @@ class JSONApi:
         self.product = ProductMethods(self)
         self.variant = VariantMethods(self)
         self.price_type = PriceTypeMethods(self)
+        self.product_folder = ProductFolderMethods(self)
 
         self.supply = SupplyMethods(self)
 
