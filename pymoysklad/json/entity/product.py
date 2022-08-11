@@ -4,12 +4,13 @@ from uuid import UUID
 
 from pymoysklad.json.entity import object
 from pymoysklad.json.entity.currency import Currency
+from pymoysklad.json.entity.productfolder import ProductFolder
 from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta, MetaArray
 from pymoysklad.json.objects.barcode import Barcode
 from pymoysklad.json.objects.images import Image
 from pymoysklad.json.objects.sale_price import SalePrice
-from pymoysklad.json.utils.types import CollectionAnswer
+from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 
 
 @dataclass(repr=False)
@@ -39,7 +40,7 @@ class Product(object.Entity):
     pathName: str | None = None
     paymentItemType: str | None = None  # TODO: create enum
     ppeType: str | None = None  # TODO: create enum
-    productFolder: Meta | None = None
+    productFolder: ProductFolder | MetaInMeta | None = None
     salePrices: list[SalePrice] | None = None
     shared: bool | None = None
     supplier: Meta | None = None
@@ -66,11 +67,11 @@ class ProductMethods(object.ObjectMethods):
     def get_product(self, uuid: UUID) -> Product:
         return self.client.get_entity(self.NAME, Product, uuid)
 
-    def create_product(self, currencies: Product | list[Product]):
-        if isinstance(currencies, list):
-            return self.client.mass_create_entity(self.NAME, currencies)
+    def create_product(self, products: Product | list[Product]):
+        if isinstance(products, list):
+            return self.client.mass_create_entity(self.NAME, products)
         else:
-            return self.client.create_entity(self.NAME, currencies)
+            return self.client.create_entity(self.NAME, products)
 
     def delete_product(self, uuid: UUID):
         return self.client.delete_entity(self.NAME, uuid)
