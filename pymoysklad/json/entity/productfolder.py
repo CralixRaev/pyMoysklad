@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from enum import Enum
 from uuid import UUID
@@ -5,7 +7,7 @@ from uuid import UUID
 from pymoysklad.json.entity import object
 from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta
-from pymoysklad.json.utils.types import CollectionAnswer
+from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 
 
 @dataclass(repr=False)
@@ -15,16 +17,15 @@ class ProductFolder(object.Entity):
     description: str | None = None
     effectiveVat: int | None = None
     effectiveVatEnabled: bool | None = None
-    group: Meta | None = None
+    group: MetaInMeta | None = None
     name: str | None = None
-    owner: Meta | None = None
+    owner: MetaInMeta | None = None
     pathName: str | None = None
-    productFolder: Meta | None = None
     taxSystem: str | None = None  # TODO: Create ENUM
     useParentVat: bool | None = None
     vat: int | None = None
     vatEnabled: bool | None = None
-
+    productFolder: ProductFolder | MetaInMeta | None = None
 
 class ProductFolderMethods(object.ObjectMethods):
     NAME = "productfolder"
