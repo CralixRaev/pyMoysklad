@@ -8,7 +8,7 @@ authors = ["Anatoly Raev <cralixraev@gmail.com>"]
 python = "^3.10"
 requests = "^2.28.1"
 requests-ratelimiter = "^0.3.2"
-mashumaro = "^3.0.3"
+mashumaro = "^3.0.4"
 self = "^2020.12.3"
 
 [tool.poetry.dev-dependencies]
