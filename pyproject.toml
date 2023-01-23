@@ -14,7 +14,7 @@ self = "^2020.12.3"
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
 mypy = "^0.971"
-python-dotenv = "^0.20.0"
+python-dotenv = "^0.21.1"
 types-requests = "^2.28.7"
 
 [build-system]
