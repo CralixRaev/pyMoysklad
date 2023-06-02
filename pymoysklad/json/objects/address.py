@@ -4,7 +4,7 @@ from pymoysklad.json.utils.types import MetaInMeta
 from pymoysklad.json.entity import object
 
 
-@dataclass(repr=False)
+@dataclass(repr=False, frozen=True)
 class Address(object.Object):
     addInfo: str | None = None
     apartment: str | None = None

@@ -5,7 +5,7 @@ from pymoysklad.json.utils.types import MetaInMeta
 from pymoysklad.json.entity import object
 
 
-@dataclass(repr=False)
+@dataclass(repr=False, frozen=True)
 class Account(object.Object):
     accountNumber: str | None = None
     agent: Meta | None = None
