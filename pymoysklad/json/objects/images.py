@@ -6,7 +6,7 @@ from pymoysklad.json.utils.types import MetaInMeta
 from pymoysklad.json.entity import object
 
 
-@dataclass(repr=False, frozen=True)
+@dataclass(repr=False)
 class Image(object.Object):
     filename: str | None = None
     meta: Meta | None = None

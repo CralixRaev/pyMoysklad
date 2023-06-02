@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from pymoysklad.json.entity import object
 
 
-@dataclass(repr=False, frozen=True)
+@dataclass(repr=False)
 class Barcode(object.Object):
     ean13: str | None = None
     ean8: str | None = None

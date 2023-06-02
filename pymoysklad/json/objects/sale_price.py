@@ -5,7 +5,7 @@ from pymoysklad.json.entity.pricetype import PriceType
 from pymoysklad.json.meta import Meta
 
 
-@dataclass(repr=False, frozen=True)
+@dataclass(repr=False)
 class SalePrice(object.Object):
     value: float | None = None
     currency: Currency | Meta | None = None
