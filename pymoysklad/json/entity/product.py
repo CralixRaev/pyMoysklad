@@ -1,11 +1,9 @@
-from dataclasses import dataclass
-from enum import Enum
+from dataclasses import dataclass, field
 from uuid import UUID
+from mashumaro import field_options
 
 from pymoysklad.json.entity import object
-from pymoysklad.json.entity.currency import Currency
 from pymoysklad.json.entity.productfolder import ProductFolder
-from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta, MetaArray
 from pymoysklad.json.objects.barcode import Barcode
 from pymoysklad.json.objects.images import Image
@@ -29,6 +27,7 @@ class Product(object.Entity):
     effectiveVatEnabled: bool | None = None
     files: MetaArray | None = None
     group: Meta | None = None
+    id_: UUID | None = field(metadata=field_options(alias="id"), default=None)
     images: CollectionAnswer[Image] | MetaArray | None = None
     isSerialTrackable: bool | None = None
     # minPrice: ...
