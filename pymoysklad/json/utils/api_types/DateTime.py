@@ -4,15 +4,8 @@ from mashumaro.types import SerializableType
 
 
 class DateTime(datetime, SerializableType):
-    def _serialize(self) -> dict[str, int]:
-        return {
-            "year": self.year,
-            "month": self.month,
-            "day": self.day,
-            "hour": self.hour,
-            "minute": self.minute,
-            "second": self.second,
-        }
+    def _serialize(self) -> str:
+        return self.strftime("%Y-%m-%d %H:%M:%S.%f")
 
     @classmethod
     def _deserialize(cls, value: str):
