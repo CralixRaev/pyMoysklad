@@ -20,7 +20,7 @@ class Object(ABC, SkipDefaultFieldsReprMixin, DataClassJSONMixin):
 class Entity(Object):
     meta: Meta | None = None
     id: UUID | None = None
-    updated: DateTime = None
+    updated: DateTime | None = None
     accountId: UUID | None = None
     externalCode: str | None = None
 
