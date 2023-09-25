@@ -40,22 +40,22 @@ edited_product = client.product.edit_product(UUID("10cb9bc1-1544-4245-bb79-fece6
 ```
 Mass delete method will mass delete objects using theirs metas
 ```python
-products_to_delete = client.products.list_product(search="DELETEME")
+products_to_delete = client.product.list_product(search="DELETEME")
 metas = [product.meta for product in products_to_delete.rows]
-client.products.mass_delete_product(metas)
+client.product.mass_delete_product(metas)
 ```
 ### [Sorting](https://dev.moysklad.ru/dc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-sortirowka-ob-ektow)
 To sort a collection just provide `order` keyword argument in `list` method.
 Order argument can contain list of tuples (`order=[("name", "desc"), ("code", "asc")]`) to provide sorting direction or simply be a list of strings (`order=["name", "code"]` to use default ascending sorting:
 ```python
-sorted_products = client.products.list_product(order=["price", ("name", "desc")])
+sorted_products = client.product.list_product(order=["price", ("name", "desc")])
 ```
 
 ### [Filtering](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-fil-traciq-wyborki-s-pomosch-u-parametra-filter)
 To filter a collection provide `filter` keyword argument in `list` method.
 Filter argument should be a tuple of strings with format described in [documentation](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-fil-traciq-wyborki-s-pomosch-u-parametra-filter) (`filter=('name!=Товар', 'price>=100')`)
 ```python
-filtered_products = client.products.list_product(filter=('name!=Товар', 'price>=100'))
+filtered_products = client.product.list_product(filter=('name!=Товар', 'price>=100'))
 ```
 
 ### [Searching](https://dev.moysklad.ru/doc/api/remap/1.2/#mojsklad-json-api-obschie-swedeniq-kontextnyj-poisk)
@@ -69,7 +69,7 @@ searched_products = client.products.list_product(search="Капибара")
 To expand some field in request use `expand` keyword argument in `list` method.
 Expand argument should be a string, containing field name, multiple field names delimited with commas or nested fields delimited by dots. `demand.agent,organization`
 ```python
-products_with_images = client.products.list_product(expand="images")
+products_with_images = client.product.list_product(expand="images")
 ```
 
 ### Limit and offset
