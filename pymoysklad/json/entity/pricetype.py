@@ -1,10 +1,7 @@
 from dataclasses import dataclass
-from enum import Enum
 from uuid import UUID
 
 from pymoysklad.json.entity import object
-from pymoysklad.json.enums import GenderEnum
-from pymoysklad.json.meta import Meta
 from pymoysklad.json.utils.types import CollectionAnswer
 
 
@@ -17,7 +14,9 @@ class PriceTypeMethods(object.ObjectMethods):
     NAME = "companysettings/pricetype"
 
     def list_price_type(self, **kwargs) -> CollectionAnswer[PriceType]:
-        return self.client.get_collection(self.NAME, PriceType, **kwargs, resource_name="context")
+        return self.client.get_collection(
+            self.NAME, PriceType, **kwargs, resource_name="context"
+        )
 
     def get_price_type(self, uuid: UUID) -> PriceType:
         return self.client.get_entity(self.NAME, PriceType, uuid, "context")

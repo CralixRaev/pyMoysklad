@@ -1,3 +1,4 @@
+import typing
 from uuid import UUID
 from abc import ABC
 from dataclasses import dataclass
@@ -13,7 +14,7 @@ from pymoysklad.json.utils.api_types.DateTime import DateTime
 @dataclass(repr=False)
 class Object(ABC, SkipDefaultFieldsReprMixin, DataClassJSONMixin):
     class Config(BaseConfig):
-        code_generation_options = [TO_DICT_ADD_OMIT_NONE_FLAG]
+        code_generation_options: typing.Final = [TO_DICT_ADD_OMIT_NONE_FLAG]
 
 
 @dataclass(repr=False)

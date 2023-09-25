@@ -1,11 +1,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import Enum
 from uuid import UUID
 
 from pymoysklad.json.entity import object
-from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta
 from pymoysklad.json.utils.types import CollectionAnswer, MetaInMeta
 
@@ -27,6 +25,7 @@ class ProductFolder(object.Entity):
     vatEnabled: bool | None = None
     productFolder: ProductFolder | MetaInMeta | None = None
 
+
 class ProductFolderMethods(object.ObjectMethods):
     NAME = "productfolder"
 
@@ -36,7 +35,9 @@ class ProductFolderMethods(object.ObjectMethods):
     def get_product_folder(self, uuid: UUID) -> ProductFolder:
         return self.client.get_entity(self.NAME, ProductFolder, uuid)
 
-    def create_product_folder(self, product_folders: ProductFolder | list[ProductFolder]):
+    def create_product_folder(
+        self, product_folders: ProductFolder | list[ProductFolder]
+    ):
         if isinstance(product_folders, list):
             return self.client.mass_create_entity(self.NAME, product_folders)
         else:

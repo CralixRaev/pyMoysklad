@@ -15,7 +15,4 @@ class EntityNotFoundError(ApiError):
     code = 1021
 
 
-ERRORS = {
-    1056: AuthError,
-    1021: EntityNotFoundError
-}
+ERRORS = {1056: AuthError, 1021: EntityNotFoundError}

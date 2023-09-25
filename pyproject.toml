@@ -1,23 +1,34 @@
 [tool.poetry]
 name = "pymoysklad"
-version = "0.1.5.3"
+version = "0.2.0"
 description = "very-WIP wrapper for Moysklad JSON API"
-authors = ["Anatoly Raev <cralixraev@gmail.com>"]
+readme = "README.md"
+authors = [
+    { name = "Anatoly Raev", email = "cralixraev@gmail.com" },
+]
+
+[tool.black]
+target-versions = ["py311"]
+
+[tool.ruff]
+select = ["E", "F", "RUF", "PERF", "TRY", "PL", "PTH", "ARG", "SIM", "PIE", "C4", "B", "S", "UP", "C90"]
+
+target-version = "py311"
 
 [tool.poetry.dependencies]
 python = "^3.10"
 requests = "^2.28.1"
-requests-ratelimiter = "^0.3.2"
-mashumaro = "^3.0.4"
+requests-rfdsatelimiter = "^0.4.1"
+mashumaro = "^3.10"
 self = "^2020.12.3"
+pre-commit = "^3.4.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^7.1.2"
-mypy = "^0.971"
-python-dotenv = "^0.20.0"
-types-requests = "^2.28.7"
+pytest = "^7.4.2"
+mypy = "^1.5.1"
+python-dotenv = "^1.0.0"
+types-requests = "^2.31.0.5"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-

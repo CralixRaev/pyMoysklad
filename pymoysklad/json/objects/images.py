@@ -2,7 +2,6 @@ from dataclasses import dataclass
 
 from pymoysklad.json.meta import Meta
 from pymoysklad.json.utils.api_types.DateTime import DateTime
-from pymoysklad.json.utils.types import MetaInMeta
 from pymoysklad.json.entity import object
 
 

@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from enum import Enum
 from uuid import UUID
 
 from pymoysklad.json.entity import object
@@ -80,7 +79,9 @@ class OrganizationMethods(object.ObjectMethods):
     def get_organization(self, uuid: UUID, get_accounts: bool = True) -> Organization:
         organization = self.client.get_entity(self.NAME, Organization, uuid)
         if get_accounts:
-            organization.accounts = self.client.get_collection(f"{self.NAME}/{uuid}/accounts", Account).rows
+            organization.accounts = self.client.get_collection(
+                f"{self.NAME}/{uuid}/accounts", Account
+            ).rows
         return organization
 
     def create_organization(self, organizations: Organization | list[Organization]):
@@ -99,4 +100,4 @@ class OrganizationMethods(object.ObjectMethods):
         return self.client.mass_delete_entity(self.NAME, metas)
 
     def metadata_organization(self):
-        raise NotImplemented
+        raise NotImplementedError

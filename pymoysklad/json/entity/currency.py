@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from enum import Enum
 from uuid import UUID
 
 from pymoysklad.json.entity import object

@@ -25,7 +25,9 @@ class CountryMethods(object.ObjectMethods):
     def get_country(self, uuid: UUID) -> Country:
         return self.client.get_entity(self.NAME, Country, uuid)
 
-    def create_country(self, countries: Country | list[Country]) -> list[Country] | Country:
+    def create_country(
+        self, countries: Country | list[Country]
+    ) -> list[Country] | Country:
         if isinstance(countries, list):
             return self.client.mass_create_entity(self.NAME, countries)
         else:

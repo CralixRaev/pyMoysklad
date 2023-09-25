@@ -1,9 +1,9 @@
-from dataclasses import dataclass, field
+import typing
+from dataclasses import dataclass
 
 
 from mashumaro.config import BaseConfig, TO_DICT_ADD_OMIT_NONE_FLAG
 from mashumaro.mixins.json import DataClassJSONMixin
-from mashumaro.types import SerializableType, GenericSerializableType
 
 from pymoysklad.json.utils.mixins import SkipDefaultFieldsReprMixin
 
@@ -21,7 +21,7 @@ class Meta(DataClassJSONMixin, SkipDefaultFieldsReprMixin):
         return self.to_dict()
 
     class Config(BaseConfig):
-        code_generation_options = [TO_DICT_ADD_OMIT_NONE_FLAG]
+        code_generation_options: typing.Final = [TO_DICT_ADD_OMIT_NONE_FLAG]
 
 
 @dataclass(repr=False)

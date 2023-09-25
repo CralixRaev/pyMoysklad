@@ -1,10 +1,8 @@
 from dataclasses import dataclass
-from enum import Enum
 from uuid import UUID
 
 from pymoysklad.json.entity import object
 from pymoysklad.json.entity.product import Product
-from pymoysklad.json.enums import GenderEnum
 from pymoysklad.json.meta import Meta, MetaArray
 from pymoysklad.json.objects.barcode import Barcode
 from pymoysklad.json.objects.images import Image

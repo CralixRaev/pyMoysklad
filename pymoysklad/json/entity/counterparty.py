@@ -6,7 +6,6 @@ from pymoysklad.json.enums import CompanyType
 from pymoysklad.json.meta import MetaArray, Meta
 from pymoysklad.json.objects.address import Address
 from pymoysklad.json.utils.api_types.DateTime import DateTime
-from pymoysklad.json.utils.types import CollectionAnswer
 
 
 @dataclass(repr=False)
@@ -47,7 +46,7 @@ class Counterparty(object.Entity):
     ogrn: str | None = None
     ogrnip: str | None = None
     okpo: str | None = None
-    priceType: str = None # TODO: PRICE OBJECT
+    priceType: str = None  # TODO: PRICE OBJECT
     tags: list[str] | None = None
 
 
