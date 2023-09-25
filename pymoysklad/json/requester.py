@@ -10,7 +10,7 @@ from requests_ratelimiter import LimiterSession
 
 from pymoysklad.json.exceptions import AuthError, ApiError, ERRORS
 
-ENDPOINT = "https://online.moysklad.ru/api/remap/1.2/"
+ENDPOINT = "https://api.moysklad.ru/api/remap/1.2/"
 
 
 class TokenAuth(requests.auth.AuthBase):
@@ -48,11 +48,15 @@ class Requester:
     @_check_for_errors
     def get(self, url: str, params: dict = None, raw=False):
         self.session.auth = self._auth
-        answer = self.session.get(urljoin(ENDPOINT, url), params=params)
+        answer = self.session.get(urljoin(ENDPOINT, url),
+                                  params=params,
+                                  headers={
+                                      'Content-type': 'application/json',
+                                      'Accept-Encoding': 'gzip'
+                                  })
         if raw:
             return answer
         return answer.json()
-
 
     @_check_for_errors
     def post(self, url: str, data: dict | list):
@@ -60,7 +64,8 @@ class Requester:
         return self.session.post(urljoin(ENDPOINT, url),
                                  data=json.dumps(data),
                                  headers={
-                                     'content-type': 'application/json'
+                                     'Content-type': 'application/json',
+                                     'Accept-Encoding': 'gzip'
                                  }).json()
 
     @_check_for_errors
@@ -69,7 +74,8 @@ class Requester:
         return self.session.put(urljoin(ENDPOINT, url),
                                 data=json.dumps(data),
                                 headers={
-                                    "content-type": "application/json"
+                                    "Content-type": "application/json",
+                                    'Accept-Encoding': 'gzip'
                                 }).json()
 
     @_check_for_errors
