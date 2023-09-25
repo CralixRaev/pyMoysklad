@@ -75,8 +75,8 @@ class ProductMethods(object.ObjectMethods):
     def delete_product(self, uuid: UUID):
         return self.client.delete_entity(self.NAME, uuid)
 
-    def edit_product(self, uuid, currency: Product) -> Product:
-        return self.client.edit_entity(self.NAME, currency, uuid)
+    def edit_product(self, uuid, product: Product) -> Product:
+        return self.client.edit_entity(self.NAME, product, uuid)
 
     def mass_delete_product(self, metas: list[Meta]):
         return self.client.mass_delete_entity(self.NAME, metas)
