@@ -4,7 +4,7 @@ version = "0.2.0"
 description = "very-WIP wrapper for Moysklad JSON API"
 readme = "README.md"
 authors = [
-    { name = "Anatoly Raev", email = "cralixraev@gmail.com" },
+    "Anatoly Raev <cralixraev@gmail.com>",
 ]
 
 [tool.black]
