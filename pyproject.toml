@@ -24,7 +24,7 @@ self = "^2020.12.3"
 pre-commit = "^3.4.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^7.4.2"
+pytest = "^8.0.0"
 mypy = "^1.5.1"
 python-dotenv = "^1.0.0"
 types-requests = "^2.31.0.5"
